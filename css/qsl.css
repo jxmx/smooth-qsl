@@ -1,0 +1,22 @@
+body {
+  padding-top: 50px;
+}
+.qsl {
+  padding: 40px 15px;
+  text-align: left;
+}
+
+.qsl-head {
+	color: white;
+	font-size: 24px;
+	padding-top: 10px;
+}
+
+.table-hover > thead > tr > th {
+  background-color: #43B3AE;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: #FADA5E;
+}
+
