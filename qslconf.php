@@ -59,6 +59,7 @@ $qsl_font_color = "#0000FF";
 
 # QSL Card QSO List Font Anti-Aliasing (set boolean true or false)
 $qsl_font_aa = true;
+$qsl_c_font_aa = $qsl_font_aa;
 
 # QSL Card Callsign Offsets - This is the offet, in pixels
 # of the start of the upper-left corner of the text for the callsign.
