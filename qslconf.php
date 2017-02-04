@@ -103,6 +103,8 @@ $qsl_horiz_band_offset = $qsl_horiz_timeon_offset + 100;
 $qsl_horiz_rst_offset = $qsl_horiz_band_offset + 200;
 $qsl_horiz_operator_offset = $qsl_horiz_rst_offset + 50;
 
+# The /qsl/ Notes block
+$qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager XXXXX. SASE is appreciated but not required.</p><p>At this time the club does not upload to LoTW or eQSL. Please do not ask.</p> </div>';
 
 ###
 ### DO NOT EDIT BELOW HERE

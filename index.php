@@ -67,13 +67,7 @@ limitations under the License.
 				</div>
 				<div class="col-md-4">
 					<div class="qsl">
-						<div class="alert alert-info">
-						<p><strong>Notes on QSLs:</strong></p>
-						<p>For paper QSL, please QSL via our manager KD8DEB.
-						SASE is appreciated but not required.</p>
-						<p>At this time the club does not upload to LoTW or eQSL.
-						Please do not ask.</p>
-						</div>
+						<?php print $qsl_page_note; ?>
 					</div>
 				</div>
 			</div>
