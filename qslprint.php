@@ -52,7 +52,7 @@ if(isset($_POST['qq'])){
 }
 
 # Do SQL Dance
-$sql = sprintf("SELECT * FROM qsos WHERE qsoid IN (%s)", $qs);
+$sql = sprintf("SELECT * FROM qsos WHERE qsoid IN (%s) ORDER BY qsodate,timeon ASC", $qs);
 $conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
 if( $conn->connect_error){
         die("Connection failed: " . $conn->connect_error);
