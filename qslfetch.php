@@ -68,7 +68,7 @@ $res = $conn->query($sql);
 if( $res->num_rows < 1){
 	echo "<p class=\"lead\">Sorry, no QSOs have been loaded into the database 
 	for that callsign yet. Make sure you entered the call as you gave on the 
-	air including any mobile, portiable, country, or region prefix or suffix to the call.<p>\n";
+	air including any mobile, portable, country, or region prefix or suffix to the call.<p>\n";
 	goto end;  # again, cleaner...
 } 
 ?>
