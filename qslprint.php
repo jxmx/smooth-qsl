@@ -118,8 +118,11 @@ while($row = $res->fetch_assoc()){
 		}
 		
 
-		$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s Mode: %s",
+		$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s  Mode: %s",
 			$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
+		if($qsl_qso_print_operator){
+			$qstring .= sprintf("  Oper: %s", $row['operator']);
+		}
 		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
 
 	} else {
