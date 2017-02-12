@@ -86,24 +86,34 @@ if( $res->num_rows < 1){
 		<th>Timestamp</th>
 		<th>Band/Freq</th>
 		<th>RST</th>
+		<th>Mode</th>
 		<th>Operator / Station</th>
 	</tr>
 </thead>
 <?php
 	while($row = $res->fetch_assoc()){
-		echo "<tr>\n";
-		echo "<td><input type=\"checkbox\" name=\"qq[]\" value=\"" . $row['qsoid'] . "\"></td>"; 
-		echo "<td>" . $row['callsign'] . "</td>";
-		echo "<td>" . $row['qsodate'] . " " . $row['timeon'] . "Z</td>\n";
+		print "<tr>\n";
+		print "<td><input type=\"checkbox\" name=\"qq[]\" value=\"" . $row['qsoid'] . "\"></td>"; 
+		print "<td>" . $row['callsign'] . "</td>";
+		print "<td>" . $row['qsodate'] . " " . $row['timeon'] . "Z</td>\n";
 		if(strlen($row['freq'] > 0)){
-			echo "<td>" . $row['freq'] . "</td>\n";
+			print "<td>" . sprintf("%.03f", $row['freq']) . "</td>\n";
 		} else {
-			echo "<td>" . $row['band'] . "</td>\n";
+			print "<td>" . $row['band'] . "</td>\n";
 		}
-		echo "<td>" . $row['rstrcvd'] . "</td>\n";
-		echo "<td>" . $row['operator'] . " on " . $row['station'] . "</td></tr>\n";
+		if(strlen($row['rstrcvd'] > 0)){
+			print "<td>" . $row['rstrcvd'] . "</td>\n";
+		} else {
+			if(strcmp($row['mode'],"CW") or strcmp($row['mode'],"cw")){
+				print "<td>599</td>\n";
+			} else {
+				print "<td>59</td>\n";
+			}
+		}
+		print "<td>" . $row['mode'] . "</td>\n";
+		print "<td>" . $row['operator'] . " on " . $row['station'] . "</td></tr>\n";
 	}
-	echo "</table><br>\n";
+	print "</table><br>\n";
 	$conn->close(); 
 ?>
 Click the checkbox next to each QSO you want to print on the certificate.
