@@ -87,7 +87,13 @@ if( $res->num_rows < 1){
 		<th>Band/Freq</th>
 		<th>RST</th>
 		<th>Mode</th>
+<?php
+if($qsl_qso_print_operator){
+?>
 		<th>Operator / Station</th>
+<?php
+}
+?>
 	</tr>
 </thead>
 <?php
@@ -111,7 +117,9 @@ if( $res->num_rows < 1){
 			}
 		}
 		print "<td>" . $row['mode'] . "</td>\n";
-		print "<td>" . $row['operator'] . " on " . $row['station'] . "</td></tr>\n";
+		if($qsl_qso_print_operator){
+			print "<td>" . $row['operator'] . " on " . $row['station'] . "</td></tr>\n";
+		}
 	}
 	print "</table><br>\n";
 	$conn->close(); 
