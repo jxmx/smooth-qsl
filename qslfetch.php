@@ -35,7 +35,7 @@ limitations under the License.
 		<!-- Custom styles for this template -->
 		<link href="css/qsl.css" rel="stylesheet">
 
-		<script src="js/misc.js"></script>
+		<script src="js/smoothqsl.js"></script>
 	</head>
 
 	<body>

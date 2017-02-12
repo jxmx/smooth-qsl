@@ -6,7 +6,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,47 +17,7 @@ limitations under the License.
 ?>
 <?php 
 include_once "qslconf.php"; 
-
-# Sanitize the call variable against injection
-if( preg_match('/^[A-Za-z0-9\/]+$/', strcleaner($_POST["call"])) == 0){
-	echo "<html><head><title>ERROR</title></head><body><h1>Invalid Parameters Error</h1></body></html>";
-	exit;
-}
-$call = strtoupper(strcleaner($_POST["call"]));
-
-# Build the "IN" array for the SELECT statement, checking the items for safety
-$qs = "";
-if(isset($_POST['qq'])){
-	$qsos = $_POST['qq'];
-	for($i = 0; $i < count($qsos); $i++){
-		if(strlen($qs) == 0){
-			if(numcleaner($qsos[$i])){
-				$qs .= numcleaner($qsos[$i]);
-			} else {
-				echo "<html><head><title>ERROR</title></head><body><h1>Invalid Parameters Error</h1></body></html>";
-				exit;				
-			}
-		} else {
-			if(numcleaner($qsos[$i])){
-				$qs .= "," . numcleaner($qsos[$i]);
-			} else {
-				echo "<html><head><title>ERROR</title></head><body><h1>Invalid Parameters Error</h1></body></html>";
-				exit;				
-			}
-		}
-	}
-} else {
-	echo "<html><head><title>ERROR</title></head><body><h1>Invalid Parameters Error</h1></body></html>";
-	exit;
-}
-
-# Do SQL Dance
-$sql = sprintf("SELECT * FROM qsos WHERE qsoid IN (%s) ORDER BY qsodate,timeon ASC", $qs);
-$conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
-if( $conn->connect_error){
-        die("Connection failed: " . $conn->connect_error);
-}
-$res = $conn->query($sql);
+include_once "qslprintpre.php";
 
 # Intialize the ImageMagick item
 $image = new Imagick($qsl_template);
@@ -94,112 +54,68 @@ if($qsl_qso_center_gravity){
 	$image->setGravity(imagick::GRAVITY_CENTER);
 }	
 
-$lcount = 0;
-while($row = $res->fetch_assoc()){	
 
-	if($qsl_qso_verbose_rec){
-		
-		$freqband = "";
-        if(strlen($row['freq'] > 0)){
-            $freqband = sprintf("%.03f", $row['freq']);
-        } else {
-            $freqband = $row['band'];
-        }
-
-		$rst = "";
-		if(strlen($row['rstrcvd'] > 0)){
-			$rst = $row['rstrcvd'];
-		} else {
-			if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
-				$rst = "599";
-			} else {
-				$rst = "59";
-			}
-		}
-		
-
-		$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s  Mode: %s",
-			$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
-		if($qsl_qso_print_operator){
-			$qstring .= sprintf("  Oper: %s", $row['operator']);
-		}
-		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
-
-	} else {
-
-		# QSO Date
-		$draw->annotation(
-			$qsl_horiz_offset, 
-			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier), 
-			$row['qsodate']
-			);
-		
-		# QSO Time
-		$draw->annotation(
-			$qsl_horiz_offset + $qsl_horiz_timeon_offset, 
-			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier), 
-			$row['timeon'] . "Z"
-			);
-			
-		# QSO Band + Freq
-        $freqband = "";
-        if(strlen($row['freq'] > 0)){
-            $freqband = sprintf("%.03f", $row['freq']);
-        } else {
-            $freqband = $row['band'];
-        }
-		$draw->annotation(
-			$qsl_horiz_offset + $qsl_horiz_band_offset,
-			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier), 
-			$freqband
-			);
-		
-		# QSO RST
-        $rst = "";
-        if(strlen($row['rstrcvd'] > 0)){
-            $rst = $row['rstrcvd'];
-        } else {
-            if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
-                $rst = "599";
-            } else {
-                $rst = "59";
-            }
-        }
-
-		$draw->annotation(
-			$qsl_horiz_offset + $qsl_horiz_rst_offset, 
-			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier),
-			$rst
-			);
-
-		# QSO Mode
-		$draw->annotation(
-			$qsl_horiz_offset + $qsl_horiz_mode_offset, 
-			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier),
-			$row['mode']
-			);
-		
-		# QSO Operator
-		if($qsl_qso_print_operator){
-			$draw->annotation(
-				$qsl_horiz_offset + $qsl_horiz_operator_offset, 
-				$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier),
-				$row['operator']
-				);
-		}
+$row = $res->fetch_assoc();
+if($qsl_qso_verbose_rec){
 	
+	$freqband = "";
+	if(strlen($row['freq'] > 0)){
+		$freqband = sprintf("%.03f", $row['freq']);
+	} else {
+		$freqband = $row['band'];
 	}
+
+	$rst = "";
+	if(strlen($row['rstrcvd'] > 0)){
+		$rst = $row['rstrcvd'];
+	} else {
+		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+			$rst = "599";
+		} else {
+			$rst = "59";
+		}
+	}
+	
+
+	$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s  Mode: %s",
+		$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
+	if($qsl_qso_print_operator){
+		$qstring .= sprintf("  Oper: %s", $row['operator']);
+	}
+	$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
+
+} else {
+
+	$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $row['qsodate']);
+	$draw->annotation($qsl_horiz_offset + $qsl_horiz_timeon_offset, $qsl_vert_offset, $row['timeon'] . "Z");
 		
-	$image->drawImage($draw);
-	$lcount++;
+	$freqband = "";
+	if(strlen($row['freq'] > 0)){
+		$freqband = sprintf("%.03f", $row['freq']);
+	} else {
+		$freqband = $row['band'];
+	}
+	$draw->annotation($qsl_horiz_offset + $qsl_horiz_band_offset, $qsl_vert_offset, $freqband);
+	
+	$rst = "";
+	if(strlen($row['rstrcvd'] > 0)){
+		$rst = $row['rstrcvd'];
+	} else {
+		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+			$rst = "599";
+		} else {
+			$rst = "59";
+		}
+	}
+
+	$draw->annotation($qsl_horiz_offset + $qsl_horiz_rst_offset, $qsl_vert_offset, $rst);
+	$draw->annotation($qsl_horiz_offset + $qsl_horiz_mode_offset, $qsl_vert_offset, $row['mode']);
+	
+	if($qsl_qso_print_operator){
+		$draw->annotation($qsl_horiz_offset + $qsl_horiz_operator_offset, $qsl_vert_offset, $row['operator']);
+	}
 }
-
-$conn->close();
-
-# Emit!
-header('Content-Type: application/pdf');
-header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
-	sprintf("%s_QSL_Card.pdf", $club_call)));
-echo $image;
-
+		
+$image->drawImage($draw);
+include_once("qslprintpost.php");
 ?>

@@ -36,8 +36,11 @@ $db_pass = "qsl";
 # ADIF Load Key
 $qsl_load_key = "xxyyzz";
 
-# QSL Card Template - Complete path to the template file on disk
+# QSL Card Template for single QSO
 $qsl_template = "SARA_W8WKY_40th_Blank.jpg";
+
+# QSL Card Template for multi QSO (for same set = $qsl_tempalte)
+$qsl_template_multi = "SARA_W8WKY_40th_Blank_Multi.jpg";
 
 # QSL Card Callsign Font
 $qsl_c_font = "Times-Bold";
@@ -72,8 +75,9 @@ $qsl_c_font_aa = $qsl_font_aa;
 # if you are printing the callsign in a textflow-type format
 # where you would want centered text then set this to true. If
 # you are printing the callsign in a box then you want this
-# to be false.
+# to be false. One config for single and one for multi QOS formats.
 $qsl_callsign_center_gravity = true;
+$qsl_callsign_center_gravity_multi = true;
 
 # The callsign prints once in one location so just provide a
 # veritcal and horizontal offset. If $qsl_callsign_center_gravity = true
@@ -83,38 +87,48 @@ $qsl_callsign_center_gravity = true;
 $qsl_callsign_vert_offset = -35;
 $qsl_callsign_horiz_offset = 0;
 
-# How many rows of QSOs should be printed on the card
-$qsl_num_qso_rows = 1;
+# Same as above but for the multi QSO certificate
+$qsl_callsign_vert_offset_multi = -15;
+$qsl_callsign_horiz_offset_multi = 0;
+
+
+# How many rows of QSOs should be printed on the card?
+$qsl_num_qso_rows = 5;
 
 # Should the QSO row(s) be printed center-offset or
 # X/Y offset? See $qsl_callsign_center_gravity.
 $qsl_qso_center_gravity = true;
+$qsl_qso_center_gravity_multi = false;
 
 # Should the operator callsign be printed as part of the QSO record? Must
 # be a true or false boolean value.
-$qsl_qso_print_operator = false;
+$qsl_qso_print_operator = true;
+$qsl_qso_print_operator_multi = $qsl_qso_print_operator;
 
-# Should the QSO records be verbose? If true, the QSO line will
-# print "YYYY-MM-DD hh:mmZ Freq:99.999 RST:59 Oper:CALL". If 
-# false only the values will print. Use true for a cert or card
-# with no QSO value boxes or false for one with boxes. Additionally
-# if this value is set to true, then then values of $qsl_horiz_*_offset
-# below are ignored and all text moves with $qsl_horiz_offset. 
+# Should the QSO record be verbose for the *SINGLE QSO* card? 
+# If true, the QSO line will print as
+#
+#    YYYY-MM-DD hh:mmZ Freq:99.999 RST:59 Oper:CALL
+# 
+# If false only the values will print in the order Date, Time,
+# Freq, RST, and Operator (if set). If this value is set to 
+# true, then then values of $qsl_horiz_*_offset
+# below are ignored and all text moves with $qsl_horiz_offset.
+# One variable for single one for multi
 $qsl_qso_verbose_rec = true;
+$qsl_qso_verbose_rec_multi = true;
 
-# The QSO list prints as offsets with multipliers for each item
-# and then a multiplier for the next line for multi-line printing.
-# Set the base offset for vertical and horizontal positioning
+# For the single QSO, this is the offset on the page for
+# where the QSO line will print. 0,0 is in the top left of the image
+# if $qsl_qso_center_gravity = false and 0,0 is in the exact middle
+# of the image of $qsl_qso_center_gravity = true. One set of variables
+# for the single format and one for multi format.
 $qsl_vert_offset = 15;
 $qsl_horiz_offset = 0;
+$qsl_vert_offset_multi = 400;
+$qsl_horiz_offset_multi = 80;
 
-# The multiline_multipier is where the next line to being for
-# a multieline QSO output. This setting is no effect if
-# $qsl_num_qso_rows is < 2. Usually $qsl_font_size + 3 is a good start
-# and you usually want to base it on $qsl_font_size.
-$qsl_multiline_multiplier = $qsl_font_size + 3;
-
-# Set the horizontal offset for the QSO details. The date is 
+# Set the horizontal offset for the Single QSO details. The date is 
 # always first followed by time, band, rst, and operator. All offsets
 # are relative to $qsl_horiz_offset. The values below can be
 # standalone integers or you can do math based on other variables
@@ -125,6 +139,24 @@ $qsl_horiz_band_offset = $qsl_horiz_timeon_offset + 100;
 $qsl_horiz_rst_offset = $qsl_horiz_band_offset + 200;
 $qsl_horiz_mode_offset = $qsl_horiz_rst_offset + 50;
 $qsl_horiz_operator_offset = $qsl_horiz_mode_offset + 50;
+
+# The multiline_multipier is where the next line to being for
+# a multieline QSO output. This setting is no effect if
+# $qsl_num_qso_rows is < 2. Usually $qsl_font_size + 3 is a good start
+# and you usually want to base it on $qsl_font_size.
+$qsl_multiline_multiplier = $qsl_font_size + 3;
+
+# Set the horizontal offset for the Multi QSO details. The date is 
+# always first followed by time, band, rst, and operator. All offsets
+# are relative to $qsl_horiz_offset_multi. The values below can be
+# standalone integers or you can do math based on other variables
+# Note that $qsl_horiz_operator_offset_multi is meaningless if 
+# $qsl_qso_print_operator is set to false.
+$qsl_horiz_timeon_offset_multi = $qsl_horiz_offset + 100;
+$qsl_horiz_band_offset_multi = $qsl_horiz_timeon_offset + 100;
+$qsl_horiz_rst_offset_multi = $qsl_horiz_band_offset + 200;
+$qsl_horiz_mode_offset_multi = $qsl_horiz_rst_offset + 50;
+$qsl_horiz_operator_offset_multi = $qsl_horiz_mode_offset + 50;
 
 # The /qsl/ Notes block
 $qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager K
