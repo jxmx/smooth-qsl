@@ -106,8 +106,20 @@ while($row = $res->fetch_assoc()){
             $freqband = $row['band'];
         }
 
-		$qstring = sprintf("%s %sZ  Freq:%s Mhz  RST:%s",
-			$row['qsodate'], $row['timeon'], $freqband, $row['rstrcvd']);
+		$rst = "";
+		if(strlen($row['rstrcvd'] > 0)){
+			$rst = $row['rstrcvd'];
+		} else {
+			if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+				$rst = "599";
+			} else {
+				$rst = "59";
+			}
+		}
+		
+
+		$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s Mode: %s",
+			$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
 		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
 
 	} else {
@@ -127,12 +139,12 @@ while($row = $res->fetch_assoc()){
 			);
 			
 		# QSO Band + Freq
-		$freqband = "";
-		if(strlen($row['freq'] > 0)){
-				$freqband = $row['freq'];
-			} else {
-				$freqband = $row['band'];
-			}
+        $freqband = "";
+        if(strlen($row['freq'] > 0)){
+            $freqband = sprintf("%.03f", $row['freq']);
+        } else {
+            $freqband = $row['band'];
+        }
 		$draw->annotation(
 			$qsl_horiz_offset + $qsl_horiz_band_offset,
 			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier), 
@@ -140,12 +152,30 @@ while($row = $res->fetch_assoc()){
 			);
 		
 		# QSO RST
+        $rst = "";
+        if(strlen($row['rstrcvd'] > 0)){
+            $rst = $row['rstrcvd'];
+        } else {
+            if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+                $rst = "599";
+            } else {
+                $rst = "59";
+            }
+        }
+
 		$draw->annotation(
 			$qsl_horiz_offset + $qsl_horiz_rst_offset, 
 			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier),
-			$row['rstrcvd']
+			$rst
 			);
-			
+
+		# QSO Mode
+		$draw->annotation(
+			$qsl_horiz_offset + $qsl_horiz_mode_offset, 
+			$qsl_vert_offset + ($lcount * $qsl_multiline_multiplier),
+			$row['mode']
+			);
+		
 		# QSO Operator
 		if($qsl_qso_print_operator){
 			$draw->annotation(

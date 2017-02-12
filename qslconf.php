@@ -123,7 +123,8 @@ $qsl_multiline_multiplier = $qsl_font_size + 3;
 $qsl_horiz_timeon_offset = $qsl_horiz_offset + 100;
 $qsl_horiz_band_offset = $qsl_horiz_timeon_offset + 100;
 $qsl_horiz_rst_offset = $qsl_horiz_band_offset + 200;
-$qsl_horiz_operator_offset = $qsl_horiz_rst_offset + 50;
+$qsl_horiz_mode_offset = $qsl_horiz_rst_offset + 50;
+$qsl_horiz_operator_offset = $qsl_horiz_mode_offset + 50;
 
 # The /qsl/ Notes block
 $qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager K
