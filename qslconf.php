@@ -36,6 +36,21 @@ $db_pass = "qsl";
 # ADIF Load Key
 $qsl_load_key = "xxyyzz";
 
+# ImageMagick type is one of php or cli. Use 'php' if your web server
+# has the PHP module built int. Use 'cli' if PHP needs to shell out
+# to the convert(1) command. If using 'cli', you may need to set
+# 'im_clipath' to the location of convert(1).
+$qsl_im_type = "cli";
+
+# Where is the ImageMagick convert(1) program located? Most likely
+# this is /usr/bin unless you're built a local installation.
+$qsl_im_clipath = "/usr/bin";
+
+# Where can ImageMagic convert(1) write output files temporarily
+# before serving them? /tmp is usually a good choice but
+# some webhosts may restrict that.
+$qsl_im_tmpdir = "/tmp";
+
 # QSL Card Template for single QSO
 $qsl_template = "SARA_W8WKY_40th_Blank.jpg";
 

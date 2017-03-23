@@ -17,10 +17,15 @@ limitations under the License.
 
 $conn->close();
 
-# Emit!
 header('Content-Type: application/pdf');
 header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
 	sprintf("%s_QSL_Card.pdf", $club_call)));
-echo $image;
+
+if(strcmp($qsl_im_type, "php") === 0){
+	echo $image;
+} else {
+	print file_get_contents($outf);
+	unlink($outf);
+}
 
 ?>
