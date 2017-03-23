@@ -17,16 +17,26 @@ limitations under the License.
 
 $conn->close();
 
-header('Content-Type: application/pdf');
-header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
-	sprintf("%s_QSL_Card.pdf", $club_call)));
+if( ! $qsl_im_debug == true ){
+	header('Content-Type: application/pdf');
+	header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
+		sprintf("%s_QSL_Card.pdf", $club_call)));
+}
 
 if(strcmp($qsl_im_type, "php") === 0){
 	echo $image;
 } else {
-	shell_exec($icli);
+	$shell_out = shell_exec(sprintf("%s 2>&1", $icli));
+	if( $qsl_im_debug == true ){
+		printf("CLI Call: %s\n<br>", $icli);
+		printf("Exec Output (blank is good): %s\n<br><br>", $shell_out);
+	}
+
 	print file_get_contents($outf);
-	unlink($outf);
+
+	if( $qsl_im_nounlink != true ){
+		unlink($outf);
+	}
 }
 
 ?>
