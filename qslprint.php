@@ -24,7 +24,7 @@ if(strcmp($qsl_im_type,"php") === 0){
 	$image = new Imagick($qsl_template);
 	$image->setImageFormat('pdf');
 } elseif(strcmp($qsl_im_type,"cli") === 0){
-	$icli = sprintf("convert %s", $qsl_template);
+	$icli = sprintf("%s/convert %s", $qsl_im_clipath, $qsl_template);
 } else {
 	echo "invalid ImageMagick type";
 	exit;
