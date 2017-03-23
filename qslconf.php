@@ -51,6 +51,14 @@ $qsl_im_clipath = "/usr/bin";
 # some webhosts may restrict that.
 $qsl_im_tmpdir = "/tmp";
 
+# When using $qsl_im_type=cli, instead of displaying the PDF display
+# certain debugging information about the shellout call.
+$qsl_im_debug = true;
+
+# When using $qsl_im_type=cli, don't delete the generated
+# PDF from $qsl_im_tmpdir. DO NOT USE 'true' IN PRODUCTION!
+$qsl_im_nounlink = false;
+
 # QSL Card Template for single QSO
 $qsl_template = "SARA_W8WKY_40th_Blank.jpg";
 
