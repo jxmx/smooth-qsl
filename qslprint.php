@@ -137,7 +137,7 @@ if(strcmp($qsl_im_type, "php") === 0){
 	$image->drawImage($draw);
 } else {
 
-$outft = tempnam($qsl_im_tmpdir,sprintf("%s_qsl", $club_call);
+$outft = tempnam($qsl_im_tmpdir,sprintf("%s_qsl", $club_call));
 $outf = sprintf("%s.pdf", $outft);
 rename($outft,$outf);
 $icli = sprintf("%s %s", $icli, $outf);

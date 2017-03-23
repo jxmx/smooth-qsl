@@ -24,6 +24,7 @@ header(sprintf("Content-Disposition: inline; filename=\"%s\"",
 if(strcmp($qsl_im_type, "php") === 0){
 	echo $image;
 } else {
+	shell_exec($icli);
 	print file_get_contents($outf);
 	unlink($outf);
 }
