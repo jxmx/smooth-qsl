@@ -18,9 +18,13 @@ limitations under the License.
 $conn->close();
 
 if( ! $qsl_im_debug == true ){
-	header('Content-Type: application/pdf');
-	header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
-		sprintf("%s_QSL_Card.pdf", $club_call)));
+	if( ! headers_sent() ){
+		header('Content-Type: application/pdf');
+		header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
+			sprintf("%s_QSL_Card.pdf", $club_call)));
+	} else {
+		print "ERROR: headers were already sent before they should have been. Printing something wrong?\n";
+	}
 }
 
 if(strcmp($qsl_im_type, "php") === 0){
