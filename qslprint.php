@@ -72,75 +72,109 @@ if(strcmp($qsl_im_type, "php") === 0){
 	if($qsl_qso_center_gravity){
 		$image->setGravity(imagick::GRAVITY_CENTER);
 	}	
+} else {
+	$icli = sprintf("%s -pointsize %d -fill '%s' -stroke '%s' -font '%s'",
+		$icli, $qsl_font_size, $qsl_font_color, $qsl_font_color, $qsl_font);
 
-	$row = $res->fetch_assoc();
-	if($qsl_qso_verbose_rec){
+}
+
+$row = $res->fetch_assoc();
+if($qsl_qso_verbose_rec){
 		
-		$freqband = "";
-		if(strlen($row['freq'] > 0)){
-			$freqband = sprintf("%.03f", $row['freq']);
-		} else {
-			$freqband = $row['band'];
-		}
-	
-		$rst = "";
-		if(strlen($row['rstrcvd'] > 0)){
-			$rst = $row['rstrcvd'];
-		} else {
-			if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
-				$rst = "599";
-			} else {
-				$rst = "59";
-			}
-		}
-		
-	
-		$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s  Mode: %s",
-			$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
-		if($qsl_qso_print_operator){
-			$qstring .= sprintf("  Oper: %s", $row['operator']);
-		}
-		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
-	
+	$freqband = "";
+	if(strlen($row['freq'] > 0)){
+		$freqband = sprintf("%.03f", $row['freq']);
 	} else {
+		$freqband = $row['band'];
+	}
 	
+	$rst = "";
+	if(strlen($row['rstrcvd'] > 0)){
+		$rst = $row['rstrcvd'];
+	} else {
+		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+			$rst = "599";
+		} else {
+			$rst = "59";
+		}
+	}
+		
+	$qstring = sprintf("%s %sZ  Freq: %sMhz  RST: %s  Mode: %s",
+		$row['qsodate'], $row['timeon'], $freqband, $rst, $row['mode']);
+	if($qsl_qso_print_operator){
+		$qstring .= sprintf("  Oper: %s", $row['operator']);
+	}
+
+	if(strcmp($qsl_im_type, "php") === 0){
+		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
+	} else {
+    	$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+	        $icli, $qsl_horiz_offset, $qsl_vert_offset, $qstring);
+	}
+	
+} else {
+
+	if(strcmp($qsl_im_type, "php") === 0){	
 		$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $row['qsodate']);
 		$draw->annotation($qsl_horiz_offset + $qsl_horiz_timeon_offset, $qsl_vert_offset, $row['timeon'] . "Z");
-			
-		$freqband = "";
-		if(strlen($row['freq'] > 0)){
-			$freqband = sprintf("%.03f", $row['freq']);
-		} else {
-			$freqband = $row['band'];
-		}
-		$draw->annotation($qsl_horiz_offset + $qsl_horiz_band_offset, $qsl_vert_offset, $freqband);
+	} else {
+		$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+            $icli, $qsl_horiz_offset, $qsl_vert_offset, $row['qsodate']);
+		$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+            $icli, $qsl_horiz_offset + $qsl_horiz_timeon_offset, $qsl_vert_offset, $row['timeon'] . "Z");
+	}
 		
-		$rst = "";
-		if(strlen($row['rstrcvd'] > 0)){
-			$rst = $row['rstrcvd'];
-		} else {
-			if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
-				$rst = "599";
-			} else {
-				$rst = "59";
-			}
-		}
+	$freqband = "";
+	if(strlen($row['freq'] > 0)){
+		$freqband = sprintf("%.03f", $row['freq']);
+	} else {
+		$freqband = $row['band'];
+	}
+	if(strcmp($qsl_im_type, "php") === 0){
+		$draw->annotation($qsl_horiz_offset + $qsl_horiz_band_offset, $qsl_vert_offset, $freqband);
+	} else {
+		$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+               $icli, $qsl_horiz_offset + $qsl_horiz_band_offset, $qsl_vert_offset, $freqband);
+	}	
 	
+	$rst = "";
+	if(strlen($row['rstrcvd'] > 0)){
+		$rst = $row['rstrcvd'];
+	} else {
+		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
+			$rst = "599";
+		} else {
+			$rst = "59";
+		}
+	}
+
+	if(strcmp($qsl_im_type, "php") === 0){	
 		$draw->annotation($qsl_horiz_offset + $qsl_horiz_rst_offset, $qsl_vert_offset, $rst);
 		$draw->annotation($qsl_horiz_offset + $qsl_horiz_mode_offset, $qsl_vert_offset, $row['mode']);
-		
+	
 		if($qsl_qso_print_operator){
 			$draw->annotation($qsl_horiz_offset + $qsl_horiz_operator_offset, $qsl_vert_offset, $row['operator']);
 		}
+	} else {
+		$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+               $icli, $qsl_horiz_offset + $qsl_horiz_rst_offset, $qsl_vert_offset, $rst);
+		$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+               $icli, $qsl_horiz_offset + $qsl_horiz_mode_offset, $qsl_vert_offset, $row['mode']);
+
+		if($qsl_qso_print_operator){
+			$icli = sprintf("%s -draw 'text %d,%d \"%s\"'",
+                $icli, $qsl_horiz_offset + $qsl_horiz_operator_offset, $qsl_vert_offset, $row['operator']);
+		}
 	}
-			
+}
+	
+if(strcmp($qsl_im_type, "php") === 0){			
 	$image->drawImage($draw);
 } else {
-
-$outft = tempnam($qsl_im_tmpdir,sprintf("%s_qsl", $club_call));
-$outf = sprintf("%s.pdf", $outft);
-rename($outft,$outf);
-$icli = sprintf("%s %s", $icli, $outf);
+	$outft = tempnam($qsl_im_tmpdir,sprintf("%s_qsl", $club_call));
+	$outf = sprintf("%s.pdf", $outft);
+	rename($outft,$outf);
+	$icli = sprintf("%s %s", $icli, $outf);
 }
 
 include_once("qslprintpost.php");
