@@ -9,12 +9,12 @@ Anniversary Special Event.
 # Installation
 ## Prerequisites
 * A websever running PHP 5.x or better with the mysqli native client library
-* A MySQL database running MySQL 5.6 or higher
-* ImageMagick 6.x or better with the ImageMagick PHP library installed
+* A database running MySQL 5.6+ or MariaDB 10.0+
+* ImageMagick 6.x or better with the ImageMagick PHP library (imagick) installed
 * Basic ability to use an xxMP stack (e.g. LAMP, WAMP, etc.)
 
 ## Basic Directions
-1. Download the Git repository.
+1. Download the Git repository for the latest stable release.
 2. Edit qslconf.php and change the configuration parameters as necessary.
 3. Copy all of the files to your webserver directory
 4. Load the qsl.sql into your MySQL server 
@@ -22,7 +22,7 @@ Anniversary Special Event.
 on a periodic basis (recommended 1hr for busier sites; see note bleow).
 
 ## Basic Coniderations
-The application is design to have simple, user-friendly URLs. For example,
+The application is designed to have simple, user-friendly URLs. For example,
 putting the base files in a subdirectory /qsl resultes in the URL
 https://example.com/qsl for the main application and https://example.com/qsl/load
 for the ADIF loader. All references to includes, configs, images, etc. are 
@@ -50,7 +50,7 @@ the ADIF file. Upload the ADIF file.
 3. Review the ADIF checkload on the next screen. Click Commit
 4. A "receipt" page will apepr.
 
-The QSL retrieval process is straightforward:
+The QSL retrieval process is straight forward:
 1. A ham navigates to https://example.com/qsl
 2. Enters their callsign
 3. Selects the QSO(s) they want to print on the card or certificate
@@ -68,8 +68,7 @@ keep the following in mind.
 of the other QSO information.
 * The QSO record is always printed as a line of information with
 relative or absolute offsets moving from the left to the page.
-* The fields are in the order DATE, TIME, FREQ, RST, OPERATOR
-and cannot be altered without changing the PHP code.
+* The fields are in the order DATE, TIME, FREQ, RST, MODE, OPERATOR
 * Multiline fields are printed one after another ordered
 by DATE, TIME in ascending order
 
@@ -87,4 +86,4 @@ general installation and configuration of a webserver, PHP, MySQL, etc.
 
 # Platform
 This system was designed and tested on a Raspberry Pi 3B running
-Raspbian 8 Jessie + backports. The webserver was nginx.
+Raspbian 8 Jessie + backports. The webserver was Apache.
