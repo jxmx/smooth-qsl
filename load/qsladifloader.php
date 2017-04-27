@@ -87,14 +87,14 @@ if( !is_uploaded_file($_FILES['adiffile']['tmp_name'])){
 			<table class="table table-striped table-hover">
 			<thead>
 				<tr>
-					<th>Date</th>
+					<th id="thle">Date</th>
 					<th>Time</th>
 					<th>Call</th>
 					<th>Freq</th>
 					<th>Band</th>
 					<th>Mode</th>
 					<th>RST</th>
-					<th>Operator</th>
+					<th id="thre">Operator</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -173,7 +173,7 @@ if( $conn->query($sql) === true ){
 				<input type="hidden" name="transid" value="<?php echo $transid; ?>">
 				<input type="hidden" name="csign" value="<?php echo $csign; ?>">
 				<input type="hidden" name="loadkey" value="<?php echo $load_key; ?>">
-				<input type="submit" name="submit" value="Commit QSOs">
+				<input id="submit" type="submit" name="submit" value="Commit QSOs">
 				</form>
 <?php
 } else {

@@ -142,7 +142,7 @@ if( $conn->query($sql) === false ){
 	goto end;
 }
 
-printf("<p class=\"lead\">Thanks for your submission, %s. These QSOs have been saved.", $csign);
+printf("<p class=\"lead\">Thanks for your submission, %s. These QSOs have been saved. You may either close this window or <a href=\"index.php\">load another ADIF</a>.", $csign);
 printf("<p>Transaction ID: %s</p>", $transid);
 end:
 $conn->close();

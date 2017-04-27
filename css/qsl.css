@@ -13,10 +13,45 @@ body {
 }
 
 .table-hover > thead > tr > th {
-  background-color: #43B3AE;
+  background-color: #2E64FE;
+  color:#f3f3f3;
+  padding: 5px 25px;
+  font-size:1.1em;
 }
+
+.table-hover > thead > tr > th#thle {
+  border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0px 0px 10px;
+  -webkit-border-radius: 10px 0px 0px 10px;
+}
+
+.table-hover > thead > tr > th#thre {
+  border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+  -webkit-border-radius: 0px 10px 10px 0px;
+}
+
+.table-hover > tbody > tr > td {
+  padding: 5px 25px;
+.}
 
 .table-hover > tbody > tr:hover {
-  background-color: #FADA5E;
+  background-color: #E6E6E6;
 }
 
+input#submit {
+  cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+  padding:5px 25px; /*add some padding to the inside of the button*/
+  background:#2e64fe; /*the colour of the button*/
+  border:1px solid #ffffff; /*required or the default border for the browser will appear*/
+  /*give the button curved corners, alter the size as required*/
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  /*style the text*/
+  color:#f3f3f3;
+  font-size:1.1em;
+}
+input#submit:hover, input#submit:focus {
+  background-color :#0431b4; /*make the background a little darker*/
+}

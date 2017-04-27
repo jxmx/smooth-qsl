@@ -62,20 +62,29 @@ limitations under the License.
 						<p><b>Callsign:</b> <input type="text" size="30" name="csign" /> <i>Note: Do not use any trailing /M, /P, etc.</i></p>
 						<p><b>Load Key:</b> <input type="text" size="30" name="loadkey" /></p>		
 						<p><input type="file" name="adiffile" id="adiffile" /></p>
-						<p><input type="submit" value="Upload ADIF" name="submit"></p>
+						<p><input type="submit" value="Upload ADIF" name="submit" id="submit"></p>
 						</form>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="qsl">
 						<div class="alert alert-warning">
-						<p><strong>Note about HamLog:</strong> This system may not work
-						with ADIF files from HamLog depending on the options 
-						chosen during the export. You must provide the fields for 
-						Callsign, QSO Date, Time On, Operator, and Freq or Band. If
-						you are having problems uploading a HamLog file, import your 
-						HamLog ADIF into your normal logging software, and
-						then re-export the QSOs.<p>
+						<p><strong>Note about ADIF Exports:</strong> This system may not work
+						with ADIF files from logging software that allows you to choose
+						which fields to export if you do not choose all of the
+						needed fields. When exporting ADIF files from your
+						logging software of choice, you must select <i>a least</i>
+						the following ADIF fields for the export:
+						<ul>
+						<li>QSO Date</li>
+						<li>Time On</li>
+						<li>Call</li>
+						<li>Freq (or Band)</li>
+						<li>Mode</li>
+						<li>RST RCVD</li>
+						<li>Operator</li>
+						</ul>
+						</p>
 						</div>
 					</div>
 				</div>

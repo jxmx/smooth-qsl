@@ -81,16 +81,20 @@ if( $res->num_rows < 1){
 <table width="80%" class="table table-striped table-hover">
 <thead>
 	<tr>
-		<th>Print?</th>
+		<th id="thle">Print?</th>
 		<th>Callsign</th>
 		<th>Timestamp</th>
 		<th>Band/Freq</th>
 		<th>RST</th>
-		<th>Mode</th>
 <?php
 if($qsl_qso_print_operator){
 ?>
-		<th>Operator / Station</th>
+		<th>Mode</th>
+		<th id="thre">Operator / Station</th>
+<?php
+} else {
+?>
+		<th id="thre">Mode</th>
 <?php
 }
 ?>
@@ -126,7 +130,7 @@ if($qsl_qso_print_operator){
 ?>
 Click the checkbox next to each QSO you want to print on the certificate.
 You may select up to <?php print $qsl_num_qso_rows; ?> QSOs per certificate.<br>
-<input type="submit" value="Retrieve"/>
+<input id="submit" type="submit" value="Retrieve"/>
 </form>
 <?php end: ?>
 			</div>
@@ -138,6 +142,7 @@ You may select up to <?php print $qsl_num_qso_rows; ?> QSOs per certificate.<br>
                 Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a></p>
 			</div>
 		</div>
+
 		<script src="js/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js"></script>
