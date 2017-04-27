@@ -57,11 +57,11 @@ limitations under the License.
 						This system allows you retrieve and print QSLs for QSOs with the
 						club call <?php echo $club_call; ?>. This system will provide
 						you with any QSL on record in the <i>current</i> QSL card or certificate
-						used by the club. To begin, enter your callsign below and click Search.</p>
+						used by the club. To begin, enter your callsign below and click Search for QSOs.</p>
 						<hr>
 						<form action="qslfetch.php" method="post">
 						<p class="lead">Call Sign: <input type="text" name="call"></p>
-						<input type="submit" value="Search for QSOs" />
+						<input id="submit" type="submit" value="Search for QSOs" />
 						</form>
 					</div>
 				</div>
