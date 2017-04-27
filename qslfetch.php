@@ -111,7 +111,7 @@ if($qsl_qso_print_operator){
 		} else {
 			print "<td>" . $row['band'] . "</td>\n";
 		}
-		if(strlen($row['rstrcvd'] > 0)){
+		if(is_int(strlen($row['rstrcvd']))){
 			print "<td>" . $row['rstrcvd'] . "</td>\n";
 		} else {
 			if(strcmp($row['mode'],"CW") or strcmp($row['mode'],"cw")){

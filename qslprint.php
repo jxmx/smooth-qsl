@@ -66,7 +66,7 @@ if($qsl_qso_verbose_rec){
 	}
 
 	$rst = "";
-	if(strlen($row['rstrcvd'] > 0)){
+	if(is_int(strlen($row['rstrcvd']))){
 		$rst = $row['rstrcvd'];
 	} else {
 		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
