@@ -59,10 +59,32 @@ limitations under the License.
 						uploading, and then click the upload button. The loader supports ADIF 2.0
 						and the ADIF v3.0 non-XML formats.</p>
 						<form method="post" action="qsladifloader.php" enctype="multipart/form-data">
-						<p><b>Callsign:</b> <input type="text" size="30" name="csign" /> <i>Note: Do not use any trailing /M, /P, etc.</i></p>
-						<p><b>Load Key:</b> <input type="text" size="30" name="loadkey" /></p>		
-						<p><input type="file" name="adiffile" id="adiffile" /></p>
-						<p><input type="submit" value="Upload ADIF" name="submit" id="submit"></p>
+
+							<p>
+							<label>Callsign:</label>
+							<input type="text" size="30" name="csign" /><br>
+							<i>Note: Do not use any trailing /M, /P, etc.</i>
+							</p>
+
+							<p>
+							<label>Load Key:</label>
+							<input type="text" size="30" name="loadkey" />	
+							</p>
+
+							<p>
+							<label>ADIF File:</label>
+							<input type="file" name="adiffile" id="adiffile" />
+							</p>
+
+							<p>
+							<label>County:</label>
+							<input type="text" size="30" name="county" /><br/>
+							<i>Enter the Ohio county you operated from. If operating outside of Ohio, enter your county and state.</i>
+							</p>
+
+							<p>
+							<input type="submit" value="Upload ADIF" name="submit" id="submit">
+							</p>
 						</form>
 					</div>
 				</div>

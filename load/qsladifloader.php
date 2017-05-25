@@ -46,6 +46,12 @@ if( !is_uploaded_file($_FILES['adiffile']['tmp_name'])){
 	exit;	
 }
 
+if(!isset($_POST["county"])){
+	echo "<html><head><title>ERROR</title></head><body><h1>Invalid Parameters Error</h1></body></html>";
+	exit;	
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,10 +146,11 @@ while($rec = $adif->get_record()){
 	printf("<td>%s</td>", $a_oper);	
 	printf("</tr>");
 	
-	#callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode
-	$insert .= sprintf("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"),", 
+	#callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode,county
+	$insert .= sprintf("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"),", 
 			addslashes($a_call), addslashes($a_band), addslashes($a_freq), addslashes($a_rst), 
-			$a_date, $a_time, addslashes($a_oper), $club_call, addslashes($a_mode));
+			$a_date, $a_time, addslashes($a_oper), $club_call, addslashes($a_mode),
+			addslashes(strcleaner($_POST["county"])));
 
 }
 

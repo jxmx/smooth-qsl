@@ -128,7 +128,7 @@ list($logid) = $res->fetch_row();
 # insert the actual transaction
 $vals = base64_decode($transdata);
 $vals = preg_replace("/\)/",",$logid)",$vals);
-$sql = sprintf("INSERT INTO qsos (callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode,logid) VALUES %s",
+$sql = sprintf("INSERT INTO qsos (callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode,county,logid) VALUES %s",
 	$vals);
 if( $conn->query($sql) === false ){
 	printf("<p class=\"lead\">Could not write the QSOs to the DB. Transaction 
