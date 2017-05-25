@@ -55,3 +55,9 @@ input#submit {
 input#submit:hover, input#submit:focus {
   background-color :#0431b4; /*make the background a little darker*/
 }
+
+form p label {
+	display: block;
+	float: left;
+	width: 75px;
+}
