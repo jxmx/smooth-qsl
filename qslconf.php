@@ -104,6 +104,8 @@ $qsl_qso_center_gravity_multi = false;
 # be a true or false boolean value.
 $qsl_qso_print_operator = true;
 $qsl_qso_print_operator_multi = $qsl_qso_print_operator;
+$qsl_horiz_operator_offset = true;
+$qsl_horiz_operator_offset_multi = $qsl_horiz_operator_offset;
 
 # Should the QSO record be verbose for the *SINGLE QSO* card? 
 # If true, the QSO line will print as
@@ -139,6 +141,7 @@ $qsl_horiz_band_offset = $qsl_horiz_timeon_offset + 100;
 $qsl_horiz_rst_offset = $qsl_horiz_band_offset + 200;
 $qsl_horiz_mode_offset = $qsl_horiz_rst_offset + 50;
 $qsl_horiz_operator_offset = $qsl_horiz_mode_offset + 50;
+$qsl_horiz_county_offset = $qsl_horiz_operator_offset + 50;
 
 # The multiline_multipier is where the next line to being for
 # a multieline QSO output. This setting is no effect if
