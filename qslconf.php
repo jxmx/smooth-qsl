@@ -104,8 +104,8 @@ $qsl_qso_center_gravity_multi = false;
 # be a true or false boolean value.
 $qsl_qso_print_operator = true;
 $qsl_qso_print_operator_multi = $qsl_qso_print_operator;
-$qsl_horiz_operator_offset = true;
-$qsl_horiz_operator_offset_multi = $qsl_horiz_operator_offset;
+$qsl_qso_print_opercounty = true;
+$qsl_qso_print_opercounty_multi = $qsl_qso_print_opercounty;
 
 # Should the QSO record be verbose for the *SINGLE QSO* card? 
 # If true, the QSO line will print as
@@ -155,11 +155,12 @@ $qsl_multiline_multiplier = $qsl_font_size + 3;
 # standalone integers or you can do math based on other variables
 # Note that $qsl_horiz_operator_offset_multi is meaningless if 
 # $qsl_qso_print_operator is set to false.
-$qsl_horiz_timeon_offset_multi = $qsl_horiz_offset + 100;
-$qsl_horiz_band_offset_multi = $qsl_horiz_timeon_offset + 100;
-$qsl_horiz_rst_offset_multi = $qsl_horiz_band_offset + 200;
-$qsl_horiz_mode_offset_multi = $qsl_horiz_rst_offset + 50;
-$qsl_horiz_operator_offset_multi = $qsl_horiz_mode_offset + 50;
+$qsl_horiz_timeon_offset_multi = $qsl_horiz_offset_multi + 100;
+$qsl_horiz_band_offset_multi = $qsl_horiz_timeon_offset_multi + 100;
+$qsl_horiz_rst_offset_multi = $qsl_horiz_band_offset_multi + 200;
+$qsl_horiz_mode_offset_multi = $qsl_horiz_rst_offset_multi + 50;
+$qsl_horiz_operator_offset_multi = $qsl_horiz_mode_offset_multi + 50;
+$qsl_horiz_county_offset_multi = $qsl_horiz_operator_offset_multi + 50;
 
 # The /qsl/ Notes block
 $qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager K
