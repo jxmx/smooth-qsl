@@ -9,7 +9,7 @@ Anniversary Special Event.
 # Installation
 ## Prerequisites
 * A websever running PHP 5.x or better with the mysqli native client library
-* A database running MySQL 5.6+ or MariaDB 10.0+
+* A database running MariaDB 10.0+ (or MySQL 5.6+)
 * ImageMagick 6.x or better with the ImageMagick PHP library (imagick) installed
 * Basic ability to use an xxMP stack (e.g. LAMP, WAMP, etc.)
 
