@@ -83,6 +83,9 @@ while($row = $res->fetch_assoc()){
 		if($qsl_qso_print_operator){
 			$qstring .= sprintf("  Oper: %s", $row['operator']);
 		}
+		if($qsl_qso_print_opercounty){
+			$qstring .= sprintf("  County: %s", $row['county']);
+		}
 		$draw->annotation($qsl_horiz_offset_multi, 
 			$qsl_vert_offset_multi + ($lcount * $qsl_multiline_multiplier), $qstring);
 
@@ -149,7 +152,15 @@ while($row = $res->fetch_assoc()){
 				);
 		}
 	
-	}
+		# QSO County
+		if($qsl_qso_print_opercounty_multi){
+			$draw->annotation(
+				$qsl_horiz_offset_multi + $qsl_horiz_county_offset_multi, 
+				$qsl_vert_offset_multi + ($lcount * $qsl_multiline_multiplier),
+				$row['county']
+				);
+		}
+}
 		
 	$image->drawImage($draw);
 	$lcount++;

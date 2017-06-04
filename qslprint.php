@@ -82,6 +82,9 @@ if($qsl_qso_verbose_rec){
 	if($qsl_qso_print_operator){
 		$qstring .= sprintf("  Oper: %s", $row['operator']);
 	}
+	if($qsl_qso_print_opercounty){
+		$qstring .= sprintf("  County: %s", $row['county']);
+	}
 	$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
 
 } else {
@@ -113,6 +116,10 @@ if($qsl_qso_verbose_rec){
 	
 	if($qsl_qso_print_operator){
 		$draw->annotation($qsl_horiz_offset + $qsl_horiz_operator_offset, $qsl_vert_offset, $row['operator']);
+	}
+
+	if($qsl_qso_print_opercounty){
+		$draw->annotation($qsl_horiz_offset + $qsl_horiz_county_offset, $qsl_vert_offset, $row['county']);
 	}
 }
 		
