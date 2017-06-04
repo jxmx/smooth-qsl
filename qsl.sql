@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for debian-linux-gnueabihf (armv7l)
+-- MySQL dump 10.15  Distrib 10.0.30-MariaDB, for debian-linux-gnueabihf (armv7l)
 --
 -- Host: localhost    Database: qsl
 -- ------------------------------------------------------
--- Server version	5.6.30-1~bpo8+1
+-- Server version	10.0.30-MariaDB-0+deb8u2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,10 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `qsl`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `qsl` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `qsl`;
+
+--
 -- Table structure for table `loadlog`
 --
 
-DROP TABLE IF EXISTS `loadlog`;
+-- DROP TABLE IF EXISTS `loadlog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `loadlog` (
@@ -28,14 +36,14 @@ CREATE TABLE `loadlog` (
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `transid` char(64) DEFAULT NULL,
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `qsos`
 --
 
-DROP TABLE IF EXISTS `qsos`;
+-- DROP TABLE IF EXISTS `qsos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qsos` (
@@ -51,16 +59,17 @@ CREATE TABLE `qsos` (
   `mode` char(10) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `logid` int(11) NOT NULL,
+  `county` char(30) DEFAULT NULL,
   PRIMARY KEY (`qsoid`),
   KEY `callsign_idx` (`callsign`)
-) ENGINE=InnoDB AUTO_INCREMENT=1725 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1883 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `trans`
 --
 
-DROP TABLE IF EXISTS `trans`;
+--DROP TABLE IF EXISTS `trans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `trans` (
@@ -79,4 +88,4 @@ CREATE TABLE `trans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-01 20:59:20
+-- Dump completed on 2017-06-04 16:01:21
