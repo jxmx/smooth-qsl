@@ -68,7 +68,7 @@ keep the following in mind.
 of the other QSO information.
 * The QSO record is always printed as a line of information with
 relative or absolute offsets moving from the left to the page.
-* The fields are in the order DATE, TIME, FREQ, RST, MODE, OPERATOR
+* The fields are in the order DATE, TIME, FREQ, RST, MODE, OPERATOR, COUNTY
 * Multiline fields are printed one after another ordered
 by DATE, TIME in ascending order
 
