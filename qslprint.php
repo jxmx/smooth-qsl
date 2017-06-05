@@ -101,7 +101,7 @@ if($qsl_qso_verbose_rec){
 	$draw->annotation($qsl_horiz_offset + $qsl_horiz_band_offset, $qsl_vert_offset, $freqband);
 	
 	$rst = "";
-	if(strlen($row['rstrcvd'] > 0)){
+	if(is_int(strlen($row['rstrcvd']))){
 		$rst = $row['rstrcvd'];
 	} else {
 		if(strcmp($row['mode'], "CW") or strcmp($row['mode'], "cw")){
