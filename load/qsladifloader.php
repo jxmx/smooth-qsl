@@ -119,7 +119,7 @@ while($rec = $adif->get_record()){
 	$a_date = preg_replace('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', '$1-$2-$3', 
 		numcleaner($rec["qso_date"]));
 	printf("<td>%s</td>", $a_date);
-	$a_time = preg_replace('/^([0-9]{2})([0-9]{2})([0-9]{2})$/', '$1:$2:$3', 
+	$a_time = preg_replace('/^([0-9]{2})([0-9]{2})([0-9]{2})$/', '$1:$2', 
 		numcleaner($rec["time_on"]));
 	printf("<td>%s</td>", $a_time);
 	$a_call = strtoupper(strcleaner($rec["call"]));
