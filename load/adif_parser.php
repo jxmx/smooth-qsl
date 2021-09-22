@@ -124,6 +124,7 @@ class ADIF_Parser
 	
 	public function load_from_file($fname) //allows the user to accept a filename as input
 	{
+		file_put_contents($fname, str_replace("<EOR>", "<eor>", file_get_contents($fname)));
 		$this->data = file_get_contents($fname);
 	}
 	
