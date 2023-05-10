@@ -75,7 +75,17 @@ limitations under the License.
 			<div class="container">
 				<hr>
 				<p class="text-muted">Site information &copy;&nbsp;<?php print date("Y"); ?>&nbsp;<?php print $club_name; ?><br/>
-				Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a></p>
+				Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a><br/>
+				This page load
+<?php
+if(random_int(1,4) > 3){
+	include("qslmaint.php");
+	print("ran");
+} else {
+	print("did not run");
+}
+?>
+			maintenance.</p>
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
