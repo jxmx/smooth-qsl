@@ -75,4 +75,13 @@ if( $conn->query($sql) === false ){
 
 end:
 $conn->close();
+
+$threshold = strtotime('-2 day');
+foreach( glob("cards/*.jpg") as $filename){
+	
+	if($threshold >= filemtime($filename)){
+		unlink($filename);
+	}
+}
+
 ?>
