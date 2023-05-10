@@ -21,7 +21,7 @@ include_once "qslprintpre.php";
 
 # Intialize the ImageMagick item
 $image = new Imagick($qsl_template);
-$image->setImageFormat('pdf');
+$image->setImageFormat('jpg');
 
 # Draw the Callsign
 $draw = new ImagickDraw();
@@ -35,7 +35,7 @@ if($qsl_callsign_center_gravity){
 	$image->setGravity(imagick::GRAVITY_CENTER);
 }
 $draw->annotation($qsl_callsign_horiz_offset, $qsl_callsign_vert_offset, $call);
-$image->drawImage($draw);
+	$image->drawImage($draw);
 
 if($qsl_callsign_center_gravity){
 	$image->setGravity(imagick::GRAVITY_NORTHWEST);

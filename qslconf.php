@@ -37,10 +37,10 @@ $db_pass = "qsl";
 $qsl_load_key = "xxyyzz";
 
 # QSL Card Template for single QSO
-$qsl_template = "SARA_W8WKY_40th_Blank.jpg";
+$qsl_template = "fake.jpg";
 
 # QSL Card Template for multi QSO (for same set = $qsl_tempalte)
-$qsl_template_multi = "SARA_W8WKY_40th_Blank_Multi.jpg";
+$qsl_template_multi = $qsl_template;
 
 # QSL Card Callsign Font
 $qsl_c_font = "Times-Bold";

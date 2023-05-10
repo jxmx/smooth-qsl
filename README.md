@@ -8,7 +8,7 @@ Anniversary Special Event.
 
 # Installation
 ## Prerequisites
-* A websever running PHP 5.x or better with the mysqli native client library
+* A websever running PHP 7.4 or better with the mysqli native client library
 * A database running MariaDB 10.0+ (or MySQL 5.6+)
 * ImageMagick 6.x or better with the ImageMagick PHP library (imagick) installed
 * Basic ability to use an xxMP stack (e.g. LAMP, WAMP, etc.)
@@ -17,6 +17,8 @@ Anniversary Special Event.
 1. Download the Git repository for the latest stable release.
 2. Edit qslconf.php and change the configuration parameters as necessary.
 3. Copy all of the files to your webserver directory
+4. Ensure the `cards` subdirectory is writable by the webserver. If this is
+being installed in a hosting provider than this is likely the default.
 4. Load the qsl.sql into your MySQL server 
 5. Setup some form of cron or other automated task to run the qslmaint.php
 on a periodic basis (recommended 1hr for busier sites; see note bleow).

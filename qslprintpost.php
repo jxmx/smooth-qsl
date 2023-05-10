@@ -18,9 +18,7 @@ limitations under the License.
 $conn->close();
 
 # Emit!
-header('Content-Type: application/pdf');
-header(sprintf("Content-Disposition: inline; filename=\"%s\"", 
-	sprintf("%s_QSL_Card.pdf", $club_call)));
-echo $image;
-
+$imgfile = sprintf("cards/%s.jpg", uniqid("$club_call-", true));
+$image->writeImages($imgfile, true);
+header(sprintf('Location: %s', $imgfile));
 ?>
