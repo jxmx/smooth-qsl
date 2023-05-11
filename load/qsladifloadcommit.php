@@ -122,19 +122,38 @@ if( $conn->query($sql) === false ){
 
 # get the id of the last log
 $sql = sprintf("SELECT LAST_INSERT_ID()");
+
+# Insertion transaction
 $res = $conn->query($sql);
 list($logid) = $res->fetch_row();
 
-# insert the actual transaction
+$conn->begin_transaction();
 $vals = base64_decode($transdata);
 $vals = preg_replace("/\)/",",$logid)",$vals);
-$sql = sprintf("INSERT INTO qsos (callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode,county,logid) VALUES %s",
-	$vals);
-if( $conn->query($sql) === false ){
-	printf("<p class=\"lead\">Could not write the QSOs to the DB. Transaction 
+$inserts = explode("),(", $vals);
+foreach( $inserts as $insert){
+	$insert = preg_replace("/[\(\)]/", "",  $insert);
+	$sql = sprintf("INSERT INTO qsos (callsign,band,freq,rstrcvd,qsodate," .
+			"timeon,operator,station,mode,county,logid) VALUES (%s)",
+			$insert);
+	$res = $conn->query($sql);
+	if( $res === false ){
+		printf("<p class=\"lead\">Individual transaction insert failed due to bad input</p>");
+		printf("<pre>%s</pre>", $conn->error);
+		printf("<pre>%s</pre>", $sql);
+		printf("Transaction ID is:<br>%s</p>\n", $transid);
+		$conn->rollback();
+	    goto end;
+	}
+} 
+
+if( $conn->commit() === false ){
+	$conn->rollback();
+	printf("<p class=\"lead\">Could not write the QSO transaction to the DB. Transaction 
 		ID is:<br>%s</p>\n", $transid);
 	goto end;
 }
+
 $sql = sprintf("DELETE FROM trans WHERE transid=\"%s\"", $transid);
 if( $conn->query($sql) === false ){
 	printf("<p class=\"lead\">Could not unlock transaction. Transaction 

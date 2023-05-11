@@ -56,10 +56,10 @@ CREATE TABLE `qsos` (
   `timeon` char(14) DEFAULT NULL,
   `operator` char(10) NOT NULL,
   `station` char(10) NOT NULL,
-  `mode` char(10) DEFAULT NULL,
+  `mode` char(30) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `logid` int(11) NOT NULL,
-  `county` char(30) DEFAULT NULL,
+  `county` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`qsoid`),
   KEY `callsign_idx` (`callsign`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1883 DEFAULT CHARSET=latin1;
@@ -88,4 +88,6 @@ CREATE TABLE `trans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-04 16:01:21
+ALTER TABLE `qsos` MODIFY `mode` char(30) DEFAULT NULL;
+ALTER TABLE `qsos` MODIFY `county` varchar(255) DEFAULT NULL;
+
