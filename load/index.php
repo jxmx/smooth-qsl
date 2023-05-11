@@ -75,6 +75,11 @@ limitations under the License.
 							<label>ADIF File:</label>
 							<input type="file" name="adiffile" id="adiffile" />
 							</p>
+							<p>
+							<span style="color:red">Note: Max file size supported by server is
+							<?php print(ini_get("upload_max_filesize")) ?></span>
+							</p>
+	
 
 							<p>
 							<label>County:</label>
