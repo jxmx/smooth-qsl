@@ -14,13 +14,25 @@ This code should work with earlier versions of PHP but is not supported.
 * ImageMagick 6.x or better with the ImageMagick PHP library (imagick) installed
 * Basic ability to use an xxMP stack (e.g. LAMP, WAMP, etc.)
 
-## Basic Directions
-1. Download the Git repository for the latest stable release.
-2. Edit qslconf.php and change the configuration parameters as necessary.
-3. Copy all of the files to your webserver directory
+## Installation
+1. Download the [latest stable release](https://github.com/octo-org/octo-repo/releases/latest).
+2. Edit `qslconf.php` and change the configuration parameters as necessary.
+3. Copy or upload all of the files to your webserver directory or hosting account.
 4. Ensure the `cards` subdirectory is writable by the webserver. If this is
 being installed in a hosting provider than this is likely the default.
-5. Load the qsl.sql into your MySQL server 
+5. Load the `qsl.sql` into your MySQL server
+
+## Upgrading
+1. Backup your existing data and database
+2. Download the [latest stable release](https://github.com/octo-org/octo-repo/releases/latest).
+3. Edit the new `qslconf.php` and merge the configuration from the old installation into the new file.
+4. Copy or upload all of the files to your webserver directory or hosting account overwriting 
+the old files. It's also fine to delete and reupload as all permanent data is stored in the database.
+5. Ensure the `cards` subdirectory is writable by the webserver. If this is
+being installed in a hosting provider than this is likely the default.
+65. Load the `qsl.sql` into your MySQL server. It will NOT delete existing data although
+errors about existing tables will appears. Errors about the existing tables is okay.
+The `qsl.sql` file will also adjust the database tables to support newer updates.
 
 ## Basic Coniderations
 The application is designed to have simple, user-friendly URLs. For example,
