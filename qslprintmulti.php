@@ -84,7 +84,7 @@ while($row = $res->fetch_assoc()){
 			$qstring .= sprintf("  Oper: %s", $row['operator']);
 		}
 		if($qsl_qso_print_opercounty){
-			$qstring .= sprintf("  County: %s", $row['county']);
+			$qstring .= sprintf("  QTH: %s", $row['county']);
 		}
 		$draw->annotation($qsl_horiz_offset_multi, 
 			$qsl_vert_offset_multi + ($lcount * $qsl_multiline_multiplier), $qstring);

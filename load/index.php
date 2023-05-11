@@ -82,9 +82,9 @@ limitations under the License.
 	
 
 							<p>
-							<label>County:</label>
+							<label>QTH:</label>
 							<input type="text" size="30" name="county" /><br/>
-							<i>Enter the Ohio county you operated from. If operating outside of Ohio, enter your county and state.</i>
+							<i>Enter your operating location for these QSOs</i>
 							</p>
 
 							<p>

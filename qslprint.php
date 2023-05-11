@@ -83,7 +83,7 @@ if($qsl_qso_verbose_rec){
 		$qstring .= sprintf("  Oper: %s", $row['operator']);
 	}
 	if($qsl_qso_print_opercounty){
-		$qstring .= sprintf("  County: %s", $row['county']);
+		$qstring .= sprintf("  QTH: %s", $row['county']);
 	}
 	$draw->annotation($qsl_horiz_offset, $qsl_vert_offset, $qstring);
 

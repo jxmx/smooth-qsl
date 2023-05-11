@@ -163,8 +163,8 @@ $qsl_horiz_operator_offset_multi = $qsl_horiz_mode_offset_multi + 50;
 $qsl_horiz_county_offset_multi = $qsl_horiz_operator_offset_multi + 50;
 
 # The /qsl/ Notes block
-$qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager K
-D8DEB. SASE is appreciated but not required.</p><p>At this time the club does not upload to LoTW or eQSL.</p> </div>';
+$qsl_page_note = '<div class="alert alert-info"><p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager
+N8EI. SASE is appreciated but not required.</p><p>Electronic logs available from LoTW.</div>';
 
 
 ###
