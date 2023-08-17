@@ -20,5 +20,5 @@ $conn->close();
 # Emit!
 $imgfile = sprintf("cards/%s.jpg", uniqid("$club_call-", true));
 $image->writeImages($imgfile, true);
-header(sprintf('Location: %s', $imgfile));
+printf("<html><head><meta http-equiv=\"refresh\" content=\"0; url=%s\" /></head></html>", $imgfile);
 ?>
