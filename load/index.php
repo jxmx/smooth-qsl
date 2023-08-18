@@ -124,8 +124,6 @@ limitations under the License.
                 Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a></p>
             </div>
         </div>
-		<script src="../js/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../js/jquery.min.js"><\/script>')</script>
 		<script src="../js/bootstrap.min.js"></script>
 	</body>
 </html>

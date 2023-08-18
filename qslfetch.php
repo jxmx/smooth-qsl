@@ -143,8 +143,6 @@ You may select up to <?php print $qsl_num_qso_rows; ?> QSOs per certificate.<br>
 			</div>
 		</div>
 
-		<script src="js/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
