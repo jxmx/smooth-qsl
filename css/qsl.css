@@ -34,11 +34,6 @@ input#submit {
   padding:5px 25px; /*add some padding to the inside of the button*/
   background:#2e64fe; /*the colour of the button*/
   border:1px solid #ffffff; /*required or the default border for the browser will appear*/
-  /*give the button curved corners, alter the size as required*/
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  /*style the text*/
   color:#f3f3f3;
   font-size:1.1em;
 }
@@ -46,3 +41,6 @@ input#submit:hover, input#submit:focus {
   background-color :#0431b4; /*make the background a little darker*/
 }
 
+.qsl-img {
+	border: 5px solid #eaeaea;
+}

@@ -30,7 +30,7 @@ limitations under the License.
 	<body>
        <header class="shadow-md bg-dark px-3">
             <div class="row">
-                <h4><?php echo $club_call; ?> QSL Print System</h4>
+                <h3><?php echo $club_call; ?> QSL Print System</h3>
             </div>
         </header>
 
