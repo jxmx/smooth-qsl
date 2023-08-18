@@ -16,42 +16,51 @@ limitations under the License.
 */
 ?>
 <?php include_once("qslconf.php"); ?>
+<?php
+error_reporting(E_ALL);
+$conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
+if( $conn->connect_error){
+    die("Connection failed: " . $conn->connect_error);
+}
+$sql = "select min(str_to_date(qsodate, \"%Y-%m-%d\")) as qd from qsos;";
+$res = $conn->query($sql);
+$resa = $res->fetch_array();
+$firstdate = $resa["qd"];
+
+$sql = "select max(str_to_date(qsodate, \"%Y-%m-%d\")) as qd from qsos;";
+$res = $conn->query($sql);
+$resa = $res->fetch_array();
+$lastdate = $resa["qd"];
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<!-- <meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../../favicon.ico"> -->
-
 		<title><?php echo $club_call; ?> QSL Print System</title>
-
-		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
 		<link href="css/qsl.css" rel="stylesheet">
-
 	</head>
 
 	<body>
-
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-			<p class="qsl-head"><?php echo $club_call; ?> QSL Print System</p>
-			</div>
-		</nav>
-		
-		<div class="container">
-		<h1><?php echo $club_name; ?> - <?php echo $club_call; ?></h1>
-		</div>
-		
-		<div class="container">
+		<header class="shadow-md bg-dark px-3">
 			<div class="row">
-				<div class="col-md-8">
-					<div class="qsl">
+				<h4><?php echo $club_call; ?> QSL Print System</h4>
+			</div>
+		</header>
+	
+		<main>	
+			<div class="container">
+				<div class="row">
+					<div class="col-12 my-2">
+						<center>
+						<h3><?php echo $club_name; ?> - <?php echo $club_call; ?></h3>
+						</center>
+					</div>
+				</div>
+				<div class="row justify-content-around">
+					<div class="col-5">
 						<p>Welcome to the <?php echo $club_name; ?> QSL printing system.
 						This system allows you retrieve and print QSLs for QSOs with the
 						club call <?php echo $club_call; ?>. This system will provide
@@ -59,21 +68,24 @@ limitations under the License.
 						used by the club. To begin, enter your callsign below and click Search for QSOs.</p>
 						<hr>
 						<form action="qslfetch.php" method="post">
-						<p class="lead">Call Sign: <input type="text" name="call"></p>
-						<input id="submit" type="submit" value="Search for QSOs" />
+						<label for="call" class="form-label"><b>Enter the Callign to Search For:</b></label>
+						<input type="text" name="call" class="form-control">
+						<button type="submit" class="btn btn-primary my-2">Search for QSOs</button>
 						</form>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="qsl">
-						<?php print $qsl_page_note; ?>
+					<div class="col-5">
+						<div class="alert alert-secondary">
+							<div class="qsl-page-note">
+								<b>First QSO Date:</b> <?php echo $firstdate; ?><br>
+								<b>Last QSO Date:</b> <?php echo $lastdate; ?><hr>
+								<?php print $qsl_page_note; ?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="footer">
-			<div class="container">
-				<hr>
+		<footer>
+			<div class="d-flex">
 				<p class="text-muted">Site information &copy;&nbsp;<?php print date("Y"); ?>&nbsp;<?php print $club_name; ?><br/>
 				Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a><br/>
 				This page load
@@ -87,7 +99,7 @@ if(random_int(1,4) > 3){
 ?>
 			maintenance.</p>
 			</div>
-		</div>
+		</footer>
 		<script src="js/bootstrap.min.js"></script>
 		</body>
 </html>

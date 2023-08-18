@@ -51,33 +51,22 @@ $transid = strtoupper(strcleaner($_POST['transid']));
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<!-- <meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../favicon.ico"> -->
-
 		<title><?php echo $club_call; ?> QSL Print System ADIF Loader</title>
-
-		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
 		<link href="../css/qsl.css" rel="stylesheet">
 
 	</head>
 
 	<body>
+		<header class="shadow-md bg-dark px-3">
+            <div class="row">
+                <h4><?php echo $club_call; ?> QSL Print System</h4>
+            </div>
+        </header>
 
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-			<p class="qsl-head"><?php echo $club_call; ?> QSL Print System ADIF Loader</p>
-			</div>
-		</nav>
-
+        <main>
 		<div class="container">
-			<div class="qsl">
 <?php
 $conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
 if( $conn->connect_error){
@@ -166,15 +155,15 @@ printf("<p>Transaction ID: %s</p>", $transid);
 end:
 $conn->close();
 ?>
-			</div>
 		</div>
-		<div id="footer">
-            <div class="container">
-                <hr>
+		</main>
+        <footer>
+            <div class="d-flex">
                 <p class="text-muted">Site information &copy;&nbsp;<?php print date("Y"); ?>&nbsp;<?php print $club_name; ?><br/>
                 Powered by <a href="https://github.com/jxmx/smooth-qsl" target="_blank">Smooth QSL</a></p>
             </div>
-        </div>
+        </footer>
+
 		<script src="../js/bootstrap.min.js"></script>
 	</body>
 </html>

@@ -20,44 +20,33 @@ limitations under the License.
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<!-- <meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../favicon.ico"> -->
-
 		<title><?php echo $club_call; ?> QSL Print System ADIF Loader</title>
-
-		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
 		<link href="../css/qsl.css" rel="stylesheet">
-
-
 	</head>
 
 	<body>
-
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-			<p class="qsl-head"><?php echo $club_call; ?> QSL Print System ADIF Loader</p>
+        <header class="shadow-md bg-dark px-3">
+            <div class="row">
+                <h4><?php echo $club_call; ?> QSL Print System</h4>
+            </div>
+        </header>
+	
+		<main>	
+		<div class="container">
+			<div class="col-12">
+				<center>
+				<h4><?php echo $club_call; ?> ADIF Loader</h4>
+				</center>
 			</div>
-		</nav>
-		
-		<div class="container">
-			<h1><?php echo $club_call; ?> ADIF Loader</h1>
-		</div>
-		
-		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
-					<div class="qsl">
 						<p>To use the loader enter your call sign, the load key provided by 
 						your club QSL manager in the <i>Load Key</i> box, select your ADIF file for 
 						uploading, and then click the upload button. The loader supports ADIF 2.0
-						and the ADIF v3.0 non-XML formats.</p>
+						and the ADIF v3.0 non-XML formats. <b><i>This system will not deduplicate logs</i></b></p>
+
 						<form method="post" action="qsladifloader.php" enctype="multipart/form-data">
 
 							<p>
@@ -88,10 +77,9 @@ limitations under the License.
 							</p>
 
 							<p>
-							<input type="submit" value="Upload ADIF" name="submit" id="submit">
+								<button type="submit" class="btn btn-secondary" id="submit" name="submit">Upload ADIF</button>
 							</p>
 						</form>
-					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="qsl">
