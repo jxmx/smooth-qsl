@@ -102,7 +102,7 @@ file. For example:
 ```
 
 # Contibuting and Support
-All cde contributions will be considered if you send me a pull request
+All code contributions will be considered if you send me a pull request
 on GitHub. However I have certain design and simplicity goals for
 this system and may not accept pulls that I deem to be too
 complex or contrevenes one of my design goals.
