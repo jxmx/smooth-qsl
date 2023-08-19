@@ -9,13 +9,13 @@ Anniversary Special Event.
 # Installation
 ## Prerequisites
 * A websever running PHP 8.0 or better with the mysqli native client library
-This code should work with earlier versions of PHP but is not supported.
+This code should work with earlier versions of PHP but it is not supported.
 * A database running MariaDB 10.0+ (or MySQL 5.6+)
 * ImageMagick 6.x or better with the ImageMagick PHP library (imagick) installed
 * Basic ability to use an xxMP stack (e.g. LAMP, WAMP, etc.)
 
 ## Installation
-1. Download the [latest stable release](https://github.com/octo-org/octo-repo/releases/latest).
+1. Download the [latest stable release](https://github.com/jxmx/smooth-qsl/releases/latest).
 2. Edit `qslconf.php` and change the configuration parameters as necessary.
 3. Copy or upload all of the files to your webserver directory or hosting account.
 4. Ensure the `cards` subdirectory is writable by the webserver. If this is
@@ -24,7 +24,7 @@ being installed in a hosting provider than this is likely the default.
 
 ## Upgrading
 1. Backup your existing data and database
-2. Download the [latest stable release](https://github.com/octo-org/octo-repo/releases/latest).
+2. Download the [latest stable release](https://github.com/jxmx/smooth-qsl/releases/latest).
 3. Edit the new `qslconf.php` and merge the configuration from the old installation into the new file.
 4. Copy or upload all of the files to your webserver directory or hosting account overwriting 
 the old files. It's also fine to delete and reupload as all permanent data is stored in the database.
@@ -51,7 +51,7 @@ The `qslmaint.php` script is run randomly on an index.php page with a 1 in 4
 randomized chance by default.
 
 # Using Smooth QSL
-For hams, all the hams need is the "load key" set in `qslconf.php`. SmoothQSL
+For those uploading ADIFs, all the ham needs is the "load key" set in `qslconf.php`. SmoothQSL
 operates on a semi-trust basis in that hams are relied upon to use their
 legitimate call signs as is expected throughout amateur radio. Set a strong
 "load key" as that is the only protection against mischef such as loading
@@ -77,7 +77,7 @@ Smooth QSO uses ImageMagick to "draw" text on top of the QSL template
 file. qslconf.php contains a series of positioning configuration directives
 that details how the QSL records are printed on the card. This allows for
 maximum flexibilty in designing a card in regards to layout and size. However
-keep the following in mind.
+keep the following in mind:
 
 * The callsign for the QSO is printed once and is independent
 of the other QSO information.
@@ -87,8 +87,22 @@ relative or absolute offsets moving from the left to the page.
 * Multiline fields are printed one after another ordered
 by DATE, TIME in ascending order
 
+# Embedding SmoothQSL in another Site
+It is possible to embed SmoothQSL in another site via an `<iframe>`
+tag. For example, one user of SmoothQSL is embedding it in their
+QRZ.com page. To embed the application, it's imperative to use
+the `sandbox="allow-downloads"` attributes on the `<iframe>`
+object or in-browser security will not permit the download of the
+file. For example:
+
+```
+<iframe sandbox="allow-downloads" frameborder="1" height="700px"
+  name="myiFrame"scrolling="no" src="https://example.com/qsl/"
+  style="border:0px #ffffff none;" width="1000px"></iframe>
+```
+
 # Contibuting and Support
-All contributions will be considered if you send me a pull request
+All cde contributions will be considered if you send me a pull request
 on GitHub. However I have certain design and simplicity goals for
 this system and may not accept pulls that I deem to be too
 complex or contrevenes one of my design goals.
