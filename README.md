@@ -30,9 +30,10 @@ being installed in a hosting provider than this is likely the default.
 the old files. It's also fine to delete and reupload as all permanent data is stored in the database.
 5. Ensure the `cards` subdirectory is writable by the webserver. If this is
 being installed in a hosting provider than this is likely the default.
-65. Load the `qsl.sql` into your MySQL server. It will NOT delete existing data although
+6. Load the `qsl.sql` into your MySQL server. It will NOT delete existing data although
 errors about existing tables will appears. Errors about the existing tables is okay.
-The `qsl.sql` file will also adjust the database tables to support newer updates.
+The `qsl.sql` file will also adjust the database tables to support newer updates. If sourcing
+the file from the shell using the `mysql` command you must include `-f` to ignore errors.
 
 ## Basic Coniderations
 The application is designed to have simple, user-friendly URLs. For example,
