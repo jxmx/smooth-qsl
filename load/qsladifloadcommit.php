@@ -167,4 +167,4 @@ $conn->close();
 		<script src="../js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php include("qslmaint.php");
+<?php include("../qslmaint.php");?>
