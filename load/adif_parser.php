@@ -1,5 +1,6 @@
 <?php
 /*
+   Copyrigth 2017-2024 Jason McCormick N8EI
    Copyright 2011-2013 Jason Harris KJ4IWX
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,16 +33,21 @@ class ADIF_Parser
 	
 	public function initialize() //this function locates the <EOH>
 	{
-		$pos = stripos($this->data, "<eoh>");
-		if($pos == false) //did we find the end of headers?
+		preg_match("/\<EOH\>/i", $this->data, $matches, PREG_OFFSET_CAPTURE);
+		$pos = $matches[0][1];
+
+		if(count($matches) < 1)
 		{
-			echo "Error: Adif_Parser Already Initialized or No <EOH> in ADIF File";
-			return 0;
-		};
-		
-		
+			echo "Error: No <EOH> found in ADIF File; file is out-of-spec";
+			return false;
+		}
+
+		if(count($matches) > 1){
+			echo"Error: Multiple <EOH> found in ADIF file; file is out-of-spec";
+			return false;
+		}
+
 		//get headers
-		
 		$this->i = 0;
 		$in_tag = false;
 		$tag = "";
@@ -106,15 +112,15 @@ class ADIF_Parser
 			
 			$this->i++;
 			
-		};
+		}
 		
 		$this->i = $pos+5; //iterate past the <eoh>
 		if($this->i >= strlen($this->data)) //is this the end of the file?
 		{
 			echo "Error: ADIF File Does Not Contain Any QSOs";
-			return 0;
-		};
-		return 1;
+			return false;
+		}
+		return true;
 	}
 	
 	public function feed($input_data) //allows the parser to be fed a string
@@ -124,7 +130,6 @@ class ADIF_Parser
 	
 	public function load_from_file($fname) //allows the user to accept a filename as input
 	{
-		file_put_contents($fname, str_replace("<EOR>", "<eor>", file_get_contents($fname)));
 		$this->data = file_get_contents($fname);
 	}
 	
@@ -192,11 +197,13 @@ class ADIF_Parser
 		{
 			return array(); //return nothing
 		};
-		$end = stripos($this->data, "<eor>", $this->i);
-		if($end == false) //is this the end?
+
+		preg_match("/\<EOR\>/i", $this->data, $matches, PREG_OFFSET_CAPTURE, $this->i);
+		if(count($matches) < 1 )
 		{
-			return array(); //return nothing
-		};
+			return array();
+		}
+		$end = $matches[0][1];
 		$record = substr($this->data, $this->i, $end-$this->i);
 		$this->i = $end+5;
 		return $this->record_to_array($record); //process and return output
