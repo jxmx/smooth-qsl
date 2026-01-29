@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2017-2023 Jason D. McCormick
+Copyright 2017-2026 Jason D. McCormick
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,16 +25,16 @@ $club_name = "Silvercreek Amateur Radio Association";
 $db_server = "localhost";
 
 # MySQL Database Name
-$db_db = "qsl";
+$db_db = "fireflyqsl";
 
 # MySQL Access User (must have SELECT and INSERT privileges on the DB)
-$db_user = "qsl";
+$db_user = "fireflyqsl";
 
 # MySQL Access Password
-$db_pass = "qsl";
+$db_pass = "fireflyqsl";
 
-# ADIF Load Key
-$qsl_load_key = "xxyyzz";
+# ADIF Load Key - This has to be at least 8 characters and three classes
+$qsl_load_key = "Q129!0jalkj32i@";
 
 # QSL Card Template for single QSO
 $qsl_template = "fake.jpg";
@@ -55,7 +55,7 @@ $qsl_c_font_color = "#000000";
 $qsl_font = "Times-Roman";
 
 # QSL Card QSO List Font Size in pixels
-$qsl_font_size = 24;	
+$qsl_font_size = 24;
 
 # QSL Card QSO List Font Color in Hex
 $qsl_font_color = "#000000";
@@ -64,14 +64,14 @@ $qsl_font_color = "#000000";
 $qsl_font_aa = true;
 $qsl_c_font_aa = $qsl_font_aa;
 
-# QSL Card Callsign Offsets - This is the offet, in pixels
+# QSL Card Callsign Offsets - This is the offset, in pixels
 # of the start of the upper-left corner of the text for the callsign.
 # In images, the top left corner of the image is 0,0 and the greater
 # the numbers the further down or right the position is. These
 # settings control the beginning locations of the callsign print
 # and the QSO log printing along with offset modifiers
 
-# Should the callsign be center-offet or X/Y offset? Basically,
+# Should the callsign be center-offset or X/Y offset? Basically,
 # if you are printing the callsign in a textflow-type format
 # where you would want centered text then set this to true. If
 # you are printing the callsign in a box then you want this
@@ -107,13 +107,13 @@ $qsl_qso_print_operator_multi = $qsl_qso_print_operator;
 $qsl_qso_print_opercounty = true;
 $qsl_qso_print_opercounty_multi = $qsl_qso_print_opercounty;
 
-# Should the QSO record be verbose for the *SINGLE QSO* card? 
+# Should the QSO record be verbose for the *SINGLE QSO* card?
 # If true, the QSO line will print as
 #
 #    YYYY-MM-DD hh:mmZ Freq:99.999 RST:59 Oper:CALL
-# 
+#
 # If false only the values will print in the order Date, Time,
-# Freq, RST, and Operator (if set). If this value is set to 
+# Freq, RST, and Operator (if set). If this value is set to
 # true, then then values of $qsl_horiz_*_offset
 # below are ignored and all text moves with $qsl_horiz_offset.
 # One variable for single one for multi
@@ -130,11 +130,11 @@ $qsl_horiz_offset = 0;
 $qsl_vert_offset_multi = 400;
 $qsl_horiz_offset_multi = 80;
 
-# Set the horizontal offset for the Single QSO details. The date is 
+# Set the horizontal offset for the Single QSO details. The date is
 # always first followed by time, band, rst, and operator. All offsets
 # are relative to $qsl_horiz_offset. The values below can be
 # standalone integers or you can do math based on other variables
-# Note that $qsl_horiz_operator_offset is meaningless if 
+# Note that $qsl_horiz_operator_offset is meaningless if
 # $qsl_qso_print_operator is set to false.
 $qsl_horiz_timeon_offset = $qsl_horiz_offset + 100;
 $qsl_horiz_band_offset = $qsl_horiz_timeon_offset + 100;
@@ -149,11 +149,11 @@ $qsl_horiz_county_offset = $qsl_horiz_operator_offset + 50;
 # and you usually want to base it on $qsl_font_size.
 $qsl_multiline_multiplier = $qsl_font_size + 3;
 
-# Set the horizontal offset for the Multi QSO details. The date is 
+# Set the horizontal offset for the Multi QSO details. The date is
 # always first followed by time, band, rst, and operator. All offsets
 # are relative to $qsl_horiz_offset_multi. The values below can be
 # standalone integers or you can do math based on other variables
-# Note that $qsl_horiz_operator_offset_multi is meaningless if 
+# Note that $qsl_horiz_operator_offset_multi is meaningless if
 # $qsl_qso_print_operator is set to false.
 $qsl_horiz_timeon_offset_multi = $qsl_horiz_offset_multi + 100;
 $qsl_horiz_band_offset_multi = $qsl_horiz_timeon_offset_multi + 100;
@@ -167,18 +167,4 @@ $qsl_page_note = '<p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please
 N8EI. SASE is appreciated but not required.</p><p>Electronic logs available from LoTW.</p>';
 
 
-###
-### DO NOT EDIT BELOW HERE
-###
 
-function numcleaner($in){
-	return filter_var($in, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_SCIENTIFIC);
-}
-
-function strcleaner($in){
-	return filter_var($in, FILTER_SANITIZE_STRING,
-		FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH |
-		FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP );
-}
-
-?>

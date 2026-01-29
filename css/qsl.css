@@ -1,23 +1,157 @@
-body {
-	font-size: .875rem;
+ :root {
+	/** core page **/
+	--page-bg: white;
+	--page-text: black;
+
+	/** custom colors **/
+	--ff-accent-red: #841617;
+	--ff-white-ish: #FEFEFE;
+	--ff-gunmetal: #353839;
+	--ff-typeahead: #FFBF00;
+	--ff-silver: #C0C0C0;
+	--ff-darker-gray: #414A4C;
+	--ff-twilight-indigo: #1F305E;
+	--ff-flag-red: #CE2029;
+	--ff-cornflower: #6495ED;
+
+	/** variables for div section header titles **/
+	--ff-titlebars-bg: var(--ff-silver);
+	--ff-titlebars-fg: var(--ff-gunmetal);
+
+	/** variables for the footer **/
+	--ff-footer-bg: var(--ff-accent-red);
+	--ff-footer-fg: var(--ff-white-ish);
+
+	/** variables for the navbar **/
+	--ff-navbar-items: var(--ff-darker-gray);
+
+	/** Variables for the station set box **/
+	--ff-stationset-box-bg: var(--ff-silver);
+
+	/** Boostrap overrides **/
+	--bs-primary: var(--ff-twilight-indigo);
+	--bs-danger: var(--ff-flag-red);
+	--ff-bs-hover-primary: var(--ff-cornflower);
+	--ff-bs-hover-danger: var(--ff-white-ish);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary) !important;
+  --bs-btn-border-color: var(--bs-primary) !important;
+  --bs-btn-hover-bg: color-mix(in srgb, var(--ff-bs-hover-primary) 85%, black) !important;
+  --bs-btn-active-bg: color-mix(in srgb, var(--ff-bs-hover-primary) 70%, black) !important;
+}
+
+.btn-danger {
+  --bs-btn-bg: var(--bs-danger) !important;
+  --bs-btn-border-color: var(--bs-danger) !important;
+  --bs-btn-hover-bg: color-mix(in srgb, var(--ff-bs-hover-danger) 85%, black) !important;
+  --bs-btn-active-bg: color-mix(in srgb, var(--ff-bs-hover-danger) 70%, black) !important;
+}
+
+
+[data-theme="dark"] {
+	/** core page **/
+	--page-bg: rgb(53,56,57);
+	--page-text: white;
+
+	/** variables for div section header titles **/
+	--ff-titlebars-bg: var(--ff-darker-gray);
+	--ff-titlebars-fg: var(--ff-white-ish);
+
+	/** variables for the navbar **/
+	--ff-navbar-items: var(--ff-silver);
+
+	/** Variables for the station set box **/
+	--ff-stationset-box-bg: var(--ff-gunmetal);
+}
+
+/** bootstrap-specific things **/
+[data-bs-theme="dark"] , [data-bs-theme="dark"] .table {
+	--bs-table-bg: transparent !important;
+
+	/** shadows on the boxes **/
+  	--bs-box-shadow: 0 .5rem 1rem rgba(255, 255, 255, .12);
+  	--bs-box-shadow-sm: 0 .125rem .25rem rgba(255, 255, 255, .08);
+  	--bs-box-shadow-lg: 0 1rem 3rem rgba(255, 255, 255, .18);
+}
+
+html, body {
 	height: 100%;
+	margin: 0;
+	background: var(--page-bg);
+	color: var(--page-text);
 }
 
 header {
-	color: white;
+	border-bottom: 3px solid var(--ff-accent-red);
+	margin-bottom: 15px;
 }
 
-footer {
-	background-color: lightgray;
-	padding: 10px;
-	line-height: 1em;
-	font-size: 0.8em;
-	margin-top: 10px;
+main {
+	flex: 1; /* push footer down */
 }
+
+.ff-page-wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.header-logo {
+	max-height: 65px;
+	width: auto;
+	height: auto;
+	border-radius: 12px;
+	margin-top: 8px;
+}
+
+.ff-footer {
+	margin-top: 25px;
+	color: var(--ff-white-ish);
+	background-color: var(--ff-footer-bg);
+}
+
+.ff-footerbar a:link, .ff-footerbar a:hover, .ff-footerbar a:active, .ff-footerbar a:visited {
+	color: var(--ff-footer-fg);;
+}
+
+.ff-stationset-box {
+	background: var(--ff-stationset-box-bg);
+}
+
+
+.f-nav-header {
+	display: inline-flex;
+}
+
+.nav-bi-big {
+	font-size: 2rem;
+}
+.nav-link, .nav-link:hover{
+	color: var(--ff-navbar-item) !important;
+}
+
+.ff-titlebars {
+	background-color: var(--ff-titlebars-bg);
+	color: var(--ff-titlebars-fg);
+}
+
+/* hides the down-carat for menu dropdowns */
+.dropdown-toggle::after { display: none; }
+
+.form-label {
+  font-weight: bold;
+}
+
+
+
+
+
 
 .qsl-page-note {
 	color: black;
-}	
+}
 
 .table-hover > thead > tr > th {
   background-color: #2E64FE;

@@ -14,21 +14,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-?>
-<?php include_once "qslconf.php"; ?>
-<?php
 
 $conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
 if( $conn->connect_error){
 	die("Connection failed: " . $conn->connect_error);
-}	
+}
 $sql = "SELECT * FROM qsos";
 $res = $conn->query($sql);
 
 if( $res->num_rows < 1){
 	if($db_maint_log){ print "No QSOs; stopping\n"; }
 	goto end;  # again, cleaner...
-} 
+}
 
 while($row = $res->fetch_assoc()){
 	$r = sprintf("%s,%s,%s,%s,%s,%s,%s,%s,%s",
@@ -78,7 +75,7 @@ $conn->close();
 
 $threshold = strtotime('-2 day');
 foreach( glob("cards/*.jpg") as $filename){
-	
+
 	if($threshold >= filemtime($filename)){
 		unlink($filename);
 	}
