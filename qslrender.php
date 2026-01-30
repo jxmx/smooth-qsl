@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2017-2023 Jason D. McCormick
+Copyright 2017-2026 Jason D. McCormick
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -122,21 +122,21 @@ $ff_header_content = sprintf("<h2>%s QSLs</h2>", $club_name);
 
 $imgfile = sprintf("cards/%s.jpg", uniqid("$club_call-", true));
 $image->writeImages($imgfile, true);
+
+require_once(__DIR__ . "/header.php");
 ?>
 <main>
     <div class="container">
         <div class="row p-3">
-            <center>
+            <div class="col text-center">
                 <a class="btn btn-secondary" role="button" href="<?php print $imgfile; ?>" download>Click Here to Download Image for Printing</a>
-            </center>
+            </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <center>
-                    <img class="img-fluid qsl-img" src="<?php print $imgfile; ?>" alt="QSL Card Image">
-                </center>
+            <div class="col-12 text-center">
+                <img class="img-fluid qsl-img" src="<?php print $imgfile; ?>" alt="QSL Card Image">
             </div>
         </div>
     </div>
-		</main>
+</main>
 <?php require_once("footer.php"); ?>
