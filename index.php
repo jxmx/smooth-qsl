@@ -21,21 +21,17 @@ require_once(__DIR__ . "/lib/include.php");
 $ff_page_title = $club_call;
 $ff_header_content = sprintf("<h2>%s QSLs</h2>", $club_name);
 
-error_reporting(E_ALL);
-$conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
-if( $conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-}
-$sql = "select min(str_to_date(qsodate, \"%Y-%m-%d\")) as qd from qsos;";
-$res = $conn->query($sql);
-$resa = $res->fetch_array();
-$firstdate = $resa["qd"];
+$ff_additional_scripts = <<<EOT
+<script src="js/jquery-4.0.0.min.js"></script>
+<script src="js/jquery.validate-1.22.0.min.js"></script>
+<script src="js/index.js"></script>
+EOT;
 
-$sql = "select max(str_to_date(qsodate, \"%Y-%m-%d\")) as qd from qsos;";
-$res = $conn->query($sql);
-$resa = $res->fetch_array();
-$lastdate = $resa["qd"];
-$conn->close();
+$qry = "SELECT MIN(STR_TO_DATE(qsodate, '%Y-%m-%d')) as qd from qsos;";
+$qso_fdate = $db->singleValResult($qry);
+
+$qry = "SELECT MAX(STR_TO_DATE(qsodate, '%Y-%m-%d')) as qd from qsos;";
+$qso_ldate = $db->singleValResult($qry);
 
 require_once(__DIR__ . "/header.php");
 ?>
@@ -51,7 +47,8 @@ require_once(__DIR__ . "/header.php");
 				you with any QSL on record in the <i>current</i> QSL card or certificate
 				used by the club. To begin, enter your callsign below and click Search for QSOs.</p>
 				<hr>
-				<form action="qslfetch.php" method="post">
+				<form id="indexsearch" name="indexsearch" action="qslfetch.php"
+					method="post" novalidate>
 					<label for="call" class="form-label"><b>Enter the Callign to Search For:</b></label>
 					<input type="text" name="call" class="form-control">
 					<button type="submit" class="btn btn-primary my-2">Search for QSOs</button>
@@ -62,8 +59,9 @@ require_once(__DIR__ . "/header.php");
 			<div class="p-3 shadow rounded-3">
 				<h5 class="rounded-3 ff-titlebars p-2 text-center">Callsign <?php echo $club_call; ?></h5>
 				<p>
-				<b>First QSO Date:</b> <?php echo $firstdate; ?><br>
-				<b>Last QSO Date:</b> <?php echo $lastdate; ?><hr>
+				<b>First QSO Date:</b> <?php echo $qso_fdate; ?><br>
+				<b>Last QSO Date:</b> <?php echo $qso_ldate; ?>
+				<hr>
 				<?php print $qsl_page_note; ?>
 				</p>
 			</div>

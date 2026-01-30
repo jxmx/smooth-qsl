@@ -27,10 +27,6 @@ function validateQsoFetchForm(){
 		return false;
 	}
 
-	if(count > 1){
-		qsoform.action = "qslprintmulti.php";
-	}
-	
 	return true;
 }
 

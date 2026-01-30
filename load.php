@@ -40,26 +40,32 @@ include_once("header.php");
 				uploading, and then click the upload button. The loader supports ADIF 2.0
 				and the ADIF v3.0 non-XML formats. <i>This system will not deduplicate logs</i></p>
 
-				<form name="loadform" id="loadform" method="post" action="qsladifloader.php" novalidate>
+				<form name="loadform" id="loadform" method="post"
+					autocomplete="off" action="load_adif_verify.php"
+					enctype="multipart/form-data" novalidate>
 
 				<label for="csign" class="form-label mt-2">Callsign</label>
-				<input id="csign" name="csign" class="form-control" aria-describedby="csign-help" type="text">
+				<input id="csign" name="csign" class="form-control"
+					autocomplete="off" aria-describedby="csign-help" type="text">
 				<div id="csign-help" class="form-text">Note: Do not use any trailing /M, /P, etc.</div>
 
 				<label for="loadkey" class="form-label mt-2">Loadkey</label>
-				<input id="loadkey" name="loadkey" class="form-control" aria-describedby="loedkey-help" type="password">
+				<input id="loadkey" name="loadkey" class="form-control"
+					autocomplete="off" aria-describedby="loedkey-help" type="password">
 				<div id="loadkey-help" class="form-text">This is the load key/password set in the configuration that
 					authorizes the uploading of logs.
 				</div>
 
 				<label for="adiffile" class="form-label mt-2">ADIF File</label>
-				<input id="adiffile" name="adiffile" class="form-control" aria-describedby="adiffile-help" type="file">
+				<input id="adiffile" name="adiffile" class="form-control"
+					autocomplete="off" aria-describedby="adiffile-help" type="file">
 				<div id="adiffile-help" class="form-text"><span style="color:red">Note: Max file size supported by server is
 					<?php print(ini_get("upload_max_filesize")) ?></span></div>
 
-				<label for="county" class="form-label mt-2">QTH / Location</label>
-				<input id="county" name="county" class="form-control" aria-describedby="county-help" type="text">
-				<div id="county-help" class="form-text">Enter your operating location for these QSOs.</div>
+				<label for="location" class="form-label mt-2">QTH / Location</label>
+				<input id="location" name="location" class="form-control"
+					autocomplete="off" aria-describedby="location-help" type="text">
+				<div id="location-help" class="form-text">Enter your operating location for these QSOs.</div>
 
 				<button type="submit" class="btn btn-primary mt-2" id="submit" name="submit">Upload ADIF</button>
 

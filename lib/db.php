@@ -1,16 +1,16 @@
 <?php
 
 // Username
-$DBUSER = "ffdl";
+$DBUSER = "fireflyqsl";
 
 // Password
-$DBPASS = "changeme";
+$DBPASS = "fireflyqsl";
 
 // Database Hostname
 $DBHOST = "localhost";
 
 // MariaDB Database
-$DBDB = "ffdl";
+$DBDB = "fireflyqsl";
 
 /**
  *  --------------------------------------------
@@ -70,7 +70,18 @@ class DB
 		} catch (PDOException $e) {
 			throw new RuntimeException("SQL error: " . $e->getMessage(), 0, $e);
 		}
-	}
+    }
+
+    public function singleValResult(string $qry, array $params = []){
+        try{
+            $stmt = $this->pdo()->prepare($qry);
+            $stmt->execute($params);
+            return $stmt->fetchColumn();
+        } catch(Exception $e){
+            return false;
+        }
+
+    }
 
 }
 

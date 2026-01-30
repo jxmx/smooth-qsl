@@ -41,4 +41,79 @@ function clean_float($in): ?float {
     return filter_var($in, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE);
 }
 
-?>
+
+
+/** checks if a callsign is valid */
+function is_callsign($callsign){
+    $callsign_pattern = '/(?:[A-Z]{1,2}|[0-9][A-Z])\d{1,2}[A-Z]{1,4}(?:\/[A-Z0-9]+)?$/i';
+    if( preg_match($callsign_pattern, $callsign)){
+        return true;
+    }
+    return false;
+}
+
+/** returns an HTTP error and stops the processing */
+function http_error_response($code, $message){
+	http_response_code($code);
+	header("Content-Type: text/plain; charset=utf-8");
+	printf("%d %s", $code, $message);
+	exit;
+}
+
+function adif_to_array($adiffile, $csign, $location){
+
+    $adif = new ADIF_Parser;
+    $adif->load_from_file($adiffile);
+    $adif->initialize();
+
+    $log = [];
+
+    while($rec = $adif->get_record()){
+        if(count($rec) == 0){
+            return false;
+        }
+
+        $a_date = preg_replace('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', '$1-$2-$3',
+            clean_int($rec["qso_date"]));
+
+        $a_time = preg_replace('/^([0-9]{2})([0-9]{2})([0-9]{2})$/', '$1:$2',
+            strcleaner($rec["time_on"]));
+
+        $a_call = strtoupper(strcleaner($rec["call"]));
+
+        $a_freq = clean_float($rec["freq"]);
+
+        $a_band = isset($rec["band"]) ? strcleaner($rec["band"]) : "";
+
+        $a_mode = strcleaner($rec["mode"]);
+
+        $a_rst  = strcleaner($rec["rst_rcvd"]);
+
+        $a_oper = (!isset($rec["operator"]) || strlen($rec["operator"]) == 0)
+            ? $csign
+            : strcleaner($rec["operator"]);
+
+        if( isset($rec["comment"]) ){
+            $a_comment = strcleaner($rec["comment"]);
+        } else {
+            $a_comment = "";
+        }
+
+        // Build the normalized record
+        $log[] = [
+            "call"      => $a_call,
+            "band"      => $a_band,
+            "freq"      => $a_freq,
+            "rst"       => $a_rst,
+            "date"      => $a_date,
+            "time"      => $a_time,
+            "operator"  => $a_oper,
+            "station"   => $csign,
+            "mode"      => $a_mode,
+            "location"  => $location,
+            "comment"   => $a_comment
+            ];
+    }
+
+    return $log;
+}
