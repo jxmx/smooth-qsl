@@ -91,7 +91,13 @@ $draw->setTextAntialias($qsl_c_font_aa);
 if($qsl_context_gravity){
 	$image->setGravity(imagick::GRAVITY_CENTER);
 }
-$draw->annotation($qsl_callsign_horiz_offset_multi, $qsl_callsign_vert_offset_multi, $call);
+
+if( $qsl_context == 2){
+    $draw->annotation($qsl_callsign_horiz_offset_multi, $qsl_callsign_vert_offset_multi, $call);
+} else {
+    $draw->annotation($qsl_callsign_horiz_offset, $qsl_callsign_vert_offset, $call);
+}
+
 $image->drawImage($draw);
 
 if($qsl_context_gravity){

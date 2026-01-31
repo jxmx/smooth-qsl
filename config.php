@@ -16,10 +16,10 @@ limitations under the License.
 */
 
 # club call
-$club_call = "W8WKY";
+$club_call = "Q1ABC";
 
 # club name
-$club_name = "Silvercreek Amateur Radio Association";
+$club_name = "Questionable ARC";
 
 # MySQL Server (most likely "localhost")
 $db_server = "localhost";
@@ -84,16 +84,16 @@ $qsl_callsign_center_gravity_multi = true;
 # then this is the offset from the center of the image, with positive
 # values moving the text down and right while negative values move
 # the text up and left.
-$qsl_callsign_vert_offset = -35;
+$qsl_callsign_vert_offset = 175;
 $qsl_callsign_horiz_offset = 0;
 
 # Same as above but for the multi QSO certificate
-$qsl_callsign_vert_offset_multi = -15;
+$qsl_callsign_vert_offset_multi = 175;
 $qsl_callsign_horiz_offset_multi = 0;
 
 
 # How many rows of QSOs should be printed on the card?
-$qsl_num_qso_rows = 5;
+$qsl_num_qso_rows = 4;
 
 # Should the QSO row(s) be printed center-offset or
 # X/Y offset? See $qsl_callsign_center_gravity.
@@ -125,10 +125,10 @@ $qsl_qso_verbose_rec_multi = true;
 # if $qsl_qso_center_gravity = false and 0,0 is in the exact middle
 # of the image of $qsl_qso_center_gravity = true. One set of variables
 # for the single format and one for multi format.
-$qsl_vert_offset = 15;
-$qsl_horiz_offset = 0;
-$qsl_vert_offset_multi = 400;
-$qsl_horiz_offset_multi = 80;
+$qsl_vert_offset = 690;
+$qsl_horiz_offset = 200;
+$qsl_vert_offset_multi = 650;
+$qsl_horiz_offset_multi = 200;
 
 # Set the horizontal offset for the Single QSO details. The date is
 # always first followed by time, band, rst, and operator. All offsets
@@ -164,7 +164,7 @@ $qsl_horiz_county_offset_multi = $qsl_horiz_operator_offset_multi + 50;
 
 # The /qsl/ Notes block
 $qsl_page_note = '<p><strong>Notes on QSLs:</strong></p><p>For paper QSL, please QSL via our manager
-N8EI. SASE is appreciated but not required.</p><p>Electronic logs available from LoTW.</p>';
+Q1XYZ. SASE is appreciated but not required.</p><p>Electronic logs available from LoTW.</p>';
 
 
 
