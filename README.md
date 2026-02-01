@@ -1,4 +1,4 @@
-# Firefly QSL / Firefly QSL
+# Firefly QSL / Smooth QSL
 Firefly QSL is a simple QSL manager designed for amateur radio clubs
 and individuals who don't need the complex QSL management system of
 major contesters and DXpeditions. The primary design consideration
@@ -7,6 +7,9 @@ to be able to upload ADIF logs and to provide a quick and easy way
 for other hams to download their QSLs. Designed
 originally to support the Silvercreek Amateur Radio Association's 40th
 Anniversary Special Event.
+
+Smooth QSL has been rebranded as Firefly QSL to match the
+Firefly Field Day Logger application.
 
 ## Major Changes from v2.x to v3
 The following are the major changes in version 3:
