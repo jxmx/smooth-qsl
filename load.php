@@ -35,10 +35,10 @@ include_once("header.php");
 	<div class="row mt-2 gx-5">
 		<div class="col-8 d-flex">
 			<div class="p-3 shadow rounded-3 flex-fill">
-				<p>To use the loader enter your call sign, the load key provided by
-				your club QSL manager in the <i>Load Key</i> box, select your ADIF file for
-				uploading, and then click the upload button. The loader supports ADIF 2.0
-				and the ADIF v3.0 non-XML formats. <i>This system will not deduplicate logs</i></p>
+				<div class="alert alert-secondary">Enter the operation callsign, select your ADIF file for
+				uploading, enter the location, and then click the upload
+				button. The loader supports ADIF 2.0 and the ADIF v3.0
+				non-XML formats. <i>This system will not deduplicate logs</i></div>
 
 				<form name="loadform" id="loadform" method="post"
 					autocomplete="off" action="load_adif_verify.php"
@@ -47,6 +47,11 @@ include_once("header.php");
 				<label for="csign" class="form-label mt-2">Callsign</label>
 				<input id="csign" name="csign" class="form-control"
 					autocomplete="off" aria-describedby="csign-help" type="text">
+
+				<div class="alert alert-info mt-2">This callsign may be different from
+				configured callsign <?php echo $club_call; ?> such as a 1x1,
+				join operation, or even random individual callsigns. All available
+				callsigns will be listed on the front page.</div>
 
 				<label for="adiffile" class="form-label mt-2">ADIF File</label>
 				<input id="adiffile" name="adiffile" class="form-control"

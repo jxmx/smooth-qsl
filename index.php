@@ -33,6 +33,12 @@ $qso_fdate = $db->singleValResult($qry);
 $qry = "SELECT MAX(STR_TO_DATE(qsodate, '%Y-%m-%d')) as qd from qsos;";
 $qso_ldate = $db->singleValResult($qry);
 
+$qry = "SELECT DISTINCT(station) FROM qsos";
+$stmt = $db->pdo()->prepare($qry);
+$stmt->execute([]);
+$c = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$avail_callsigns = implode(" ", $c);
+
 require_once(__DIR__ . "/header.php");
 ?>
 
@@ -43,9 +49,8 @@ require_once(__DIR__ . "/header.php");
 			<div class="p-3 shadow rounded-3">
 				<p>Welcome to the <?php echo $club_name; ?> QSL printing system.
 				This system allows you retrieve and print QSLs for QSOs with the
-				club call <?php echo $club_call; ?>. This system will provide
-				you with any QSL on record in the <i>current</i> QSL card or certificate
-				used by the club. To begin, enter your callsign below and click Search for QSOs.</p>
+				callsigns listed to the right. To begin, enter your callsign
+				below and click Search for QSOs.</p>
 				<hr>
 				<form id="indexsearch" name="indexsearch" action="qslfetch.php"
 					method="post" novalidate>
@@ -57,8 +62,8 @@ require_once(__DIR__ . "/header.php");
 		</div>
 		<div class="col d-flex">
 			<div class="p-3 shadow rounded-3">
-				<h5 class="rounded-3 ff-titlebars p-2 text-center">Callsign <?php echo $club_call; ?></h5>
 				<p>
+				<b>Available QSLs from:</b> <?php echo $avail_callsigns; ?><br>
 				<b>First QSO Date:</b> <?php echo $qso_fdate; ?><br>
 				<b>Last QSO Date:</b> <?php echo $qso_ldate; ?>
 				<hr>
