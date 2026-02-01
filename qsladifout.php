@@ -15,6 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 require_once(__DIR__ . "/lib/include.php");
+require_login();
 
 header("Content-Type: text/plain; charset=utf-8");
 

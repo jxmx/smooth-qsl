@@ -37,6 +37,16 @@
                 <ul class="nav nav-pills f-nav-header">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            <i class="bi bi-list nav-bi-big"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="load.php">Load Log</a></li>
+                            <li><a class="dropdown-item" href="qsladifout.php">ADIF Export</a></li>
+                            <li><a class="dropdown-item" href="#">Sample Card</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
                             <i class="bi bi-moon-stars-fill nav-bi-big"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
