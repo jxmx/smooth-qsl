@@ -14,10 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-?>
-<?php include_once "../qslconf.php"; ?>
-<?php include_once "adif_parser.php"; ?>
-<?php
+require_once(__DIR__ . "/lib/include.php");
 
 $options = getopt("c:f:l:");
 
@@ -29,7 +26,7 @@ $csign = strtoupper(strcleaner($options['c']));
 
 if(!isset($options["l"])){
 	print "ERROR: Missing required -l LOCALE option";
-	exit;	
+	exit;
 }
 
 
@@ -49,9 +46,9 @@ while($rec = $adif->get_record()){
 		break;
 	}
 
-	$a_date = preg_replace('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', '$1-$2-$3', 
+	$a_date = preg_replace('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', '$1-$2-$3',
 		numcleaner($rec["qso_date"]));
-	$a_time = preg_replace('/^([0-9]{2})([0-9]{2})([0-9]{2})$/', '$1:$2', 
+	$a_time = preg_replace('/^([0-9]{2})([0-9]{2})([0-9]{2})$/', '$1:$2',
 		numcleaner($rec["time_on"]));
 	$a_call = strtoupper(strcleaner($rec["call"]));
 	$a_freq = strcleaner($rec["freq"]);
@@ -71,10 +68,10 @@ while($rec = $adif->get_record()){
 	}
 	printf("%s %s\t%s\t%s\t%s\t%s\t%s\t%s\n",
 		$a_date, $a_time, $a_call, $a_freq, $a_band, $a_mode, $a_rst, $a_oper);
-	
+
 	#callsign,band,freq,rstrcvd,qsodate,timeon,operator,station,mode,county
-	$insert .= sprintf("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"),", 
-			addslashes($a_call), addslashes($a_band), addslashes($a_freq), addslashes($a_rst), 
+	$insert .= sprintf("(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"),",
+			addslashes($a_call), addslashes($a_band), addslashes($a_freq), addslashes($a_rst),
 			$a_date, $a_time, addslashes($a_oper), $club_call, addslashes($a_mode),
 			addslashes(strcleaner($options["l"])));
 
@@ -90,7 +87,7 @@ $transid = hash("sha256", $insert);
 $conn = new mysqli($db_server, $db_user, $db_pass, $db_db);
 if( $conn->connect_error){
 	die("Connection failed: " . $conn->connect_error);
-}	
+}
 $sql = sprintf("INSERT INTO trans (transid,transdata,transtimet) VALUES ('%s','%s','%s')",
 	$transid, $insert, time());
 

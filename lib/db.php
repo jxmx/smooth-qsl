@@ -1,16 +1,16 @@
 <?php
 
 // Username
-$DBUSER = "fireflyqsl";
+$DBUSER = $db_user;
 
 // Password
-$DBPASS = "fireflyqsl";
+$DBPASS = $db_pass;
 
 // Database Hostname
-$DBHOST = "localhost";
+$DBHOST = $db_server;
 
 // MariaDB Database
-$DBDB = "fireflyqsl";
+$DBDB = $db_db;
 
 /**
  *  --------------------------------------------
