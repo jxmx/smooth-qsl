@@ -1,20 +1,9 @@
 $(function () {
-    $('input[id="csign"]').on('input', function () {
+    $('input[id="callsign"]').on('input', function () {
         const upper = $(this).val().toUpperCase();
         $(this).val(upper);
     });
 });
-
-// Add a custom rule called "pwcheckclasses"
-$.validator.addMethod("pwcheckclasses", function(value, element) {
-let classes = 0;
-if (/[a-z]/.test(value)) classes++;        // lowercase
-if (/[A-Z]/.test(value)) classes++;        // uppercase
-if (/[0-9]/.test(value)) classes++;        // digit
-if (/[^A-Za-z0-9]/.test(value)) classes++; // special character
-
-return classes >= 3; // require at least 3 of the 4
-}, "Password must contain at least three of the following: lowercase, uppercase, number, special character.");
 
 // Add a custom rule called "callsign"
 const callsignRegex = /^(?:[A-Z]{1,2}|[0-9][A-Z])\d{1,2}[A-Z]{1,4}(?:\/[A-Z0-9]+)?$/i;
@@ -22,26 +11,16 @@ $.validator.addMethod("callsign", function(value, element) {
     return this.optional(element) || callsignRegex.test(value);
 }, "Please enter a valid ITU-format amateur radio callsign.");
 
-$("#loadform").validate({
+$("#loginbox").validate({
     //debug: true,
     rules: {
-        "csign": {
+        "callsign": {
             required: true,
             callsign: true
         },
-        "adiffile": {
+        "password": {
             required: true,
-            extension: "adi|adif"
-        },
-        "location": {
-            required: true,
-            minlength: 3,
-            maxlength: 30
-        }
-    },
-    messages: {
-        logfile: {
-            extension: "Please upload a .adi or .adif file"
+            minlength: 8,
         }
     },
     highlight: function (element) {

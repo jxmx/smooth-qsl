@@ -15,6 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 include_once(__DIR__ . "/lib/include.php");
+require_login();
 
 // This is the page title in <head>>. It's followed by "| Firefly QSL"
 $ff_page_title = $club_call;
@@ -27,21 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	http_error_response(405, "invalid request method");
 }
 
-if( !isset($_POST["submit"])){
-
-}
-
 if( !is_callsign($_POST['csign']) ){
 	http_error_response(400, "invalid callsign format");
-}
-
-if(!isset($_POST["loadkey"])){
-	http_error_response(400, "missing element loadkey");
-}
-
-$load_key = strcleaner($_POST["loadkey"]);
-if( strcmp($qsl_load_key, $load_key) !== 0 ){
-	http_error_response(401, "invalid loadkey");
 }
 
 if(!isset($_POST["location"])){

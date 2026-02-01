@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 include_once(__DIR__ . "/lib/include.php");
+require_login();
 
 // This is the page title in <head>>. It's followed by "| Firefly QSL"
 $ff_page_title = $club_call;

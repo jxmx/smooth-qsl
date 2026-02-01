@@ -15,12 +15,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 include_once(__DIR__ . "/lib/include.php");
+require_login();
 
 $ff_additional_scripts = <<<EOT
 <script src="js/jquery-4.0.0.min.js"></script>
 <script src="js/jquery.validate-1.22.0.min.js"></script>
 <script src="js/load.js"></script>
-
 EOT;
 
 // This is the page title in <head>>. It's followed by "| Firefly QSL"
@@ -47,14 +47,6 @@ include_once("header.php");
 				<label for="csign" class="form-label mt-2">Callsign</label>
 				<input id="csign" name="csign" class="form-control"
 					autocomplete="off" aria-describedby="csign-help" type="text">
-				<div id="csign-help" class="form-text">Note: Do not use any trailing /M, /P, etc.</div>
-
-				<label for="loadkey" class="form-label mt-2">Loadkey</label>
-				<input id="loadkey" name="loadkey" class="form-control"
-					autocomplete="off" aria-describedby="loedkey-help" type="password">
-				<div id="loadkey-help" class="form-text">This is the load key/password set in the configuration that
-					authorizes the uploading of logs.
-				</div>
 
 				<label for="adiffile" class="form-label mt-2">ADIF File</label>
 				<input id="adiffile" name="adiffile" class="form-control"

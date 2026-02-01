@@ -15,11 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# club call
+# club call - This MUST be UPPERCASE
 $club_call = "Q1ABC";
 
 # club name
 $club_name = "Questionable ARC";
+
+# password for the username "club call"
+$club_password = "SurfaceClutter";
 
 # MySQL Server (most likely "localhost")
 $db_server = "localhost";
@@ -32,9 +35,6 @@ $db_user = "fireflyqsl";
 
 # MySQL Access Password
 $db_pass = "fireflyqsl";
-
-# ADIF Load Key - This has to be at least 8 characters and three classes
-$qsl_load_key = "Q129!0jalkj32i@";
 
 # QSL Card Template for single QSO
 $qsl_template = "fake.jpg";

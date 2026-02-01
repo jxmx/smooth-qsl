@@ -60,6 +60,52 @@ function http_error_response($code, $message){
 	exit;
 }
 
+/**
+ * Perform an HTTP redirect and stop execution.
+ *
+ * @param string $url  The target URL (absolute or relative)
+ * @param int    $code HTTP status code (301, 302, 303, 307, 308)
+ */
+function http_redirect(string $url, int $code = 302): void
+{
+    // Basic sanity check
+    if (headers_sent()) {
+        throw new RuntimeException("Cannot redirect; headers already sent.");
+    }
+
+    http_response_code($code);
+    header("Location: {$url}");
+    exit;
+}
+
+/** for privileged pages */
+function require_login(): void
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    if (empty($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+
+        // Current request path + query
+        $current = $_SERVER['REQUEST_URI'];
+
+        // Only allow internal paths that start with "/"
+        // This prevents: http://evil.com, //evil.com, javascript:, etc.
+        if (!preg_match('#^/[A-Za-z0-9/_\-.?=&]*$#', $current)) {
+            http_error_response(400, "invalid page redirection");
+        }
+
+        $next = urlencode($current);
+
+        http_redirect("login.php?nextpage={$next}");
+        exit;
+    }
+}
+
+
+
+
 function adif_to_array($adiffile, $csign, $location){
 
     $adif = new ADIF_Parser;
